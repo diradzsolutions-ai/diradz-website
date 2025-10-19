@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    
     <!-- SEO Meta Tags -->
     <title>Diradz Solutions - Immersive 3D Web Experience</title>
     <meta name="description" content="Experience the future with Diradz Solutions, the best website developer in Bangalore. We create immersive 3D websites, AI-powered applications, and provide leading digital marketing solutions.">
     <meta name="keywords" content="3D Website, Immersive Web Experience, Best Website developer in Bangalore, Website building company in Bangalore, Web app building company, AI-powered web and app development, digital marketing company, AI & Automation Solutions">
 
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
-
+    
+    <!-- Deferred JS Libraries for Performance -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
+    <script src="https://unpkg.com/swup@4" defer></script>
 
     <style>
         :root {
             --diradz-gold: #c99040;
-            --royal-green: #006A4E;
             --dark-navy: #0a192f;
         }
         body {
@@ -34,12 +34,12 @@
             margin: 0;
         }
         .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .royal-green { color: var(--royal-green); }
         .gold { color: var(--diradz-gold); }
+        .bg-gold { background-color: var(--diradz-gold); }
+        .border-gold { border-color: var(--diradz-gold); }
         .diradz-glow {
             text-shadow: 0 0 8px var(--diradz-gold), 0 0 10px var(--diradz-gold);
         }
-
 
         #webgl-canvas {
             position: fixed;
@@ -48,7 +48,7 @@
             z-index: -1;
             outline: none;
         }
-       
+        
         .header {
              position: fixed;
              top: 0;
@@ -57,12 +57,12 @@
              z-index: 100;
              padding: 1rem 0;
              background: linear-gradient(to bottom, rgba(10, 25, 47, 0.8), transparent);
+             backdrop-filter: blur(4px);
         }
-       
+        
         .nav-link:hover {
             color: var(--diradz-gold);
         }
-
 
         .content-wrapper {
             width: 100%;
@@ -70,7 +70,6 @@
             position: relative;
             background-color: transparent;
         }
-
 
         .content-block {
             min-height: 100vh;
@@ -81,27 +80,28 @@
             margin: 0 auto;
         }
 
-
         .content-box {
             max-width: 500px;
-            padding: 2rem;
-            background: rgba(10, 25, 47, 0.5);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 25, 47, 0.85);
             border: 1px solid rgba(201, 144, 64, 0.2);
             border-radius: 1rem;
-            /* For tilt effect */
             transform-style: preserve-3d;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(201, 144, 64, 0.3);
+        }
 
         .content-block.left .content-box {
             margin-right: auto;
         }
-       
+        
         .content-block.right .content-box {
             margin-left: auto;
         }
-       
+        
         .footer {
             position: relative;
             z-index: 10;
@@ -110,434 +110,483 @@
             text-align: center;
             border-top: 1px solid rgba(201, 144, 64, 0.2);
         }
-       
+
+        /* Swup.js Page Transition Styles */
+        .transition-fade {
+            transition: opacity 0.4s, transform 0.4s;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        html.is-animating .transition-fade {
+            opacity: 0;
+            transform: translateY(20px);
+        }
     </style>
 </head>
 <body>
 
-
     <canvas id="webgl-canvas"></canvas>
-
 
     <!-- Header -->
     <header class="header">
         <nav class="container mx-auto px-6 flex justify-between items-center">
-            <a href="#home" class="nav-link text-2xl font-montserrat font-black flex items-center gap-2 cursor-pointer">
+            <a href="index.html" class="nav-link text-2xl font-montserrat font-black flex items-center gap-2 cursor-pointer">
                 <span class="diradz-glow gold">DIRADZ</span>
                 <span class="gold border-2 border-gold px-2 py-1">SOLUTIONS</span>
             </a>
+            
+            <!-- Desktop Menu -->
             <div class="hidden lg:flex space-x-6 items-center">
-                <a href="#home" class="nav-link text-white font-semibold">Home</a>
+                <a href="index.html" class="nav-link text-white font-semibold">Home</a>
                 <a href="#about" class="nav-link text-white font-semibold">About Us</a>
                 <a href="#solutions" class="nav-link text-white font-semibold">Solutions</a>
-                <a href="solutions.html" target="_top" class="nav-link text-white font-semibold">Products and Services</a>
-                <a href="blog.html" target="_top" class="nav-link text-white font-semibold">Blog</a>
+                <a href="solutions.html" class="nav-link text-white font-semibold">Products and Services</a>
+                <a href="blog.html" class="nav-link text-white font-semibold">Blog</a>
                 <a href="#contact" class="nav-link text-white font-semibold">Contact Us</a>
             </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="lg:hidden">
+                <button id="menu-btn" type="button" class="z-50 block text-white hover:text-gold focus:outline-none">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                        <path id="menu-open-icon" fill-rule="evenodd" d="M4 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2z"/>
+                        <path id="menu-close-icon" class="hidden" fill-rule="evenodd" d="M18.278 17.278a1 1 0 0 1-1.414 0L12 12.414l-4.864 4.864a1 1 0 0 1-1.414-1.414L10.586 11 5.722 6.136a1 1 0 1 1 1.414-1.414L12 9.586l4.864-4.864a1 1 0 1 1 1.414 1.414L13.414 11l4.864 4.864a1 1 0 0 1 0 1.414z"/>
+                    </svg>
+                </button>
+            </div>
         </nav>
-    </header>
-
-
-    <main id="content-wrapper" class="content-wrapper">
-        <!-- Hero Section -->
-        <section id="home" class="content-block left">
-            <div class="content-box text-left" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-                <h1 class="text-4xl md:text-5xl font-montserrat font-black mb-4">
-                    <span class="text-white">AI-Powered</span>
-                    <span class="block gold">Digital Transformation</span>
-                </h1>
-                <p class="text-lg text-gray-300 mb-6">
-                    Innovate. Secure. Automate. We build the immersive web experiences of tomorrow.
-                </p>
-                <p class="text-sm text-gray-400">Scroll to begin the journey</p>
-            </div>
-        </section>
-
-
-        <!-- Stats Section -->
-        <section id="stats" class="content-block right">
-             <div class="content-box text-center" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-                <div class="grid grid-cols-3 gap-4">
-                    <div>
-                        <h3 class="text-3xl md:text-4xl font-bold gold">70+</h3>
-                        <p class="text-gray-300 text-sm">Businesses Transformed</p>
-                    </div>
-                     <div>
-                        <h3 class="text-3xl md:text-4xl font-bold gold">99.9%</h3>
-                        <p class="text-gray-300 text-sm">Security Uptime</p>
-                    </div>
-                     <div>
-                        <h3 class="text-3xl md:text-4xl font-bold gold">24/7</h3>
-                        <p class="text-gray-300 text-sm">Global Support</p>
-                    </div>
-                </div>
-             </div>
-        </section>
-
-
-        <!-- About Us Section -->
-        <section id="about" class="content-block left">
-             <div class="content-box text-left" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-                <h2 class="text-3xl font-bold mb-6"><span class="royal-green">About</span> <span class="gold">Us</span></h2>
-                <div class="space-y-4">
-                    <div>
-                        <h3 class="text-xl font-bold gold mb-2">Our Vision</h3>
-                        <p class="text-gray-300 text-sm">To empower businesses with next-generation digital solutions, AI-driven automation, and seamless technology integration.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold royal-green mb-2">Our Mission</h3>
-                        <p class="text-gray-300 text-sm">To revolutionize industries by providing cutting-edge web development, AI, robotics, and cybersecurity solutions.</p>
-                    </div>
-                </div>
-             </div>
-        </section>
-
-
-        <!-- Our Story Section -->
-        <section id="story" class="content-block right">
-             <div class="content-box text-left" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-                <h2 class="text-3xl font-bold mb-6"><span class="royal-green">Our</span> <span class="gold">Story</span></h2>
-                <p class="text-gray-300 text-sm">Diradz combines smart digital transformation, deep AI-powered customization, and robust security to deliver accessible, scalable solutions worldwide. Founded in Bengaluru, we are expanding globally with a strong focus on innovation and client success.</p>
-             </div>
-        </section>
-
-
-        <!-- Solutions Section -->
-        <section id="solutions" class="content-block left">
-            <div class="content-box text-left" style="max-width: 600px;" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-                <h2 class="text-3xl font-bold mb-6"><span class="royal-green">Our</span> <span class="gold">Solutions</span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="font-bold text-lg gold mb-2">AI & Automation</h3>
-                        <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
-                            <li>AI-powered web and app development</li>
-                            <li>Robotics software integration</li>
-                            <li>Predictive analytics for business insights</li>
-                            <li>AI-driven chatbots & virtual assistants</li>
-                            <li>Decision-making AI tools</li>
-                        </ul>
-                    </div>
-                     <div>
-                        <h3 class="font-bold text-lg gold mb-2">IT & Cybersecurity</h3>
-                        <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
-                            <li>End-to-end cybersecurity frameworks</li>
-                            <li>Cloud computing & data protection</li>
-                            <li>IT infrastructure setup and management</li>
-                        </ul>
-                    </div>
-                     <div>
-                        <h3 class="font-bold text-lg gold mb-2">Business Optimization</h3>
-                        <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
-                            <li>Workflow automation & intelligent dashboards</li>
-                            <li>IoT-enabled smart business processes</li>
-                        </ul>
-                    </div>
-                     <div>
-                        <h3 class="font-bold text-lg gold mb-2">Technology Integration</h3>
-                        <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
-                            <li>Custom software, ERP & CRM integration</li>
-                            <li>Digital marketing solutions</li>
-                        </ul>
-                    </div>
-                </div>
-                <a href="solutions.html" target="_top" class="mt-6 inline-block font-bold bg-gold text-black py-2 px-6 rounded-md hover:bg-royal-green hover:text-white transition duration-300 text-sm">
-                    Explore All Services
-                </a>
-            </div>
-        </section>
-
-
-        <!-- Global Reach Section -->
-        <section id="global-reach" class="content-block right">
-             <div class="content-box text-left" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-                <h2 class="text-3xl font-bold mb-6"><span class="royal-green">Global</span> <span class="gold">Roadmap</span></h2>
-                 <ul class="space-y-2 text-sm text-gray-300 list-disc list-inside">
-                     <li><strong>Market Reach:</strong> Serving North America, Europe, & Asia.</li>
-                     <li><strong>Tech Expansion:</strong> Investing in AI, cybersecurity, and robotics.</li>
-                     <li><strong>Geographic Growth:</strong> Expanding into Southeast Asia & the Middle East.</li>
-                 </ul>
-             </div>
-        </section>
-
-
-        <!-- Blog Teaser Section -->
-        <section id="blog-teaser" class="content-block left">
-             <div class="content-box text-center" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-                <h2 class="text-3xl font-bold mb-6"><span class="royal-green">Insights &</span> <span class="gold">Innovations</span></h2>
-                <p class="text-gray-300 mb-4 text-sm">Explore our latest articles on the future of digital transformation.</p>
-                <a href="blog.html" target="_top" class="mt-6 inline-block font-bold bg-gold text-black py-2 px-6 rounded-md hover:bg-royal-green hover:text-white transition duration-300 text-sm">
-                    Visit Our Blog
-                </a>
-             </div>
-        </section>
-
-
-        <!-- Contact Section -->
-        <section id="contact" class="content-block right">
-            <div class="content-box text-left" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-                 <h2 class="text-3xl font-bold mb-6"><span class="royal-green">Connect</span> <span class="gold">With Us</span></h2>
-                 <form name="contact" method="POST" data-netlify="true" class="space-y-3">
-                    <input type="hidden" name="form-name" value="contact" />
-                    <input type="text" name="name" placeholder="Your Name" class="w-full bg-gray-800/50 text-white p-2 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition text-sm" required>
-                    <input type="email" name="email" placeholder="Your Email" class="w-full bg-gray-800/50 text-white p-2 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition text-sm" required>
-                    <textarea name="message" placeholder="Your Message" rows="2" class="w-full bg-gray-800/50 text-white p-2 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition text-sm" required></textarea>
-                    <button type="submit" class="w-full bg-gold text-black font-bold py-2 px-6 rounded-md hover:bg-royal-green hover:text-white transition duration-300 text-sm">Send Message</button>
-                </form>
-             </div>
-        </section>
-       
-        <!-- Office Location Section -->
-        <section id="office" class="content-block left">
-            <div class="content-box text-left" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-                <h2 class="text-3xl font-bold mb-6"><span class="royal-green">Our</span> <span class="gold">Office</span></h2>
-                <address class="not-italic text-gray-300 text-sm">
-                    #72/2, Sulikunte, Sarjapur Road,<br>
-                    Bengaluru, Karnataka 562125
-                </address>
-                <p class="text-gray-300 text-sm mt-4">
-                    <strong>Phone:</strong> <a href="tel:+919100536320" class="hover:text-gold transition-colors">+91 91005 36320</a>
-                </p>
-                <div class="mt-6 rounded-lg overflow-hidden border border-gold/20">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.858999317586!2d77.75895781529559!3d12.916843090892042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0d7deb1eaaaa%3A0xb695e6fbed3607e0!2sSulikunte%2C%20Karnataka%20562125!5e0!3m2!1sen!2sin!4v1668584852925!5m2!1sen!2sin"
-                        class="w-full h-48"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-        </section>
-    </main>
-   
-    <footer class="footer">
-        <div class="container mx-auto">
-            <div class="mb-6">
-                <p class="text-gray-400 mb-4">Follow us on</p>
-                <div class="flex justify-center items-center space-x-6">
-                    <a href="https://www.facebook.com/share/17E2G5q1XD/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
-                    </a>
-                     <a href="https://www.instagram.com/kamaldharmarealty?igsh=MTIyaHY0ZHF6a2ljeQ==" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm0 1.623c-2.393 0-2.713.01-3.664.058-1.144.053-1.62.224-1.932.348-.45.18-.73.398-1.018.688a2.81 2.81 0 00-.688 1.018c-.123.312-.295.788-.348 1.932-.048.95-.058 1.271-.058 3.664s.01 2.713.058 3.664c.053 1.144.224 1.62.348 1.932.18.45.398.73.688 1.018a2.81 2.81 0 001.018.688c.312.123.788.295 1.932.348.95.048 1.271.058 3.664.058s2.713-.01 3.664-.058c1.144-.053 1.62-.224 1.932-.348.45-.18-.73-.398 1.018-.688a2.81 2.81 0 00.688-1.018c.123-.312.295-.788.348-1.932.048-.95.058-1.271.058-3.664s-.01-2.713-.058-3.664c-.053-1.144-.224-1.62-.348-1.932a2.81 2.81 0 00-.688-1.018c-.288-.288-.568-.508-1.018-.688-.312-.123-.788-.295-1.932-.348C15.028 3.633 14.708 3.623 12.315 3.623z" clip-rule="evenodd" /><path d="M12 8.118a3.882 3.882 0 100 7.764 3.882 3.882 0 000-7.764zM12 14.3a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z"/><path d="M16.882 7.118a.97.97 0 100-1.94.97.97 0 000 1.94z"/></svg>
-                     </a>
-                     <a href="https://x.com/iamkamaldharma?t=dfBtSwRhs4IOR3B-cPSBg&s=09" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors duration-300">
-                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
-                     </a>
-                     <a href="https://wa.me/message/E7C24NJUAKAH1" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.85L2 22l5.25-1.38c1.41.75 3 1.13 4.75 1.13h.04c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.84-9.91-9.84zm4.53 12.28c-.28.42-1.03.78-1.42.83s-.84.05-1.29-.15c-.45-.2-1.02-.48-1.92-1.13c-.9-.65-1.5-1.46-1.72-1.71c-.22-.25-.45-.51-.45-.83s0-.5.15-.65c.15-.15.34-.2.45-.2s.25,0,.38.05c.13.05.28.33.34.42s.08.18.11.28c.03.1.04.15,0,.25c-.04.1-.11.18-.21.28c-.1.1-.21.23-.28.32c-.08.08-.15.17-.04.32c.11.15.48.63.95 1.05c.47.42.87.56 1.02.63c.15.07.24.06.34-.04c.1-.1.42-.48.53-.63c.11-.15.21-.15.34-.1s.41.2.48.25c.07.05.12.08.14.12c.02.04.02.24-.06.48z"/></svg>
-                     </a>
-                </div>
-            </div>
-            <div class="text-gray-500 text-xs mt-6 border-t border-gray-800 pt-6">
-                <a href="privacy.html" target="_top" class="hover:text-gold transition-colors">Privacy Policy</a>
-                <span class="mx-2">|</span>
-                <span>© 2025 Diradz Solutions. All Rights Reserved.</span>
-                <p class="mt-2">Pioneering the Future of Digital Intelligence.</p>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#0a192f] py-4">
+            <div class="flex flex-col items-center space-y-4">
+                <a href="index.html" class="nav-link text-white font-semibold">Home</a>
+                <a href="#about" class="nav-link text-white font-semibold">About Us</a>
+                <a href="#solutions" class="nav-link text-white font-semibold">Solutions</a>
+                <a href="solutions.html" class="nav-link text-white font-semibold">Products and Services</a>
+                <a href="blog.html" class="nav-link text-white font-semibold">Blog</a>
+                <a href="#contact" class="nav-link text-white font-semibold">Contact Us</a>
             </div>
         </div>
-    </footer>
+    </header>
 
+    <main id="swup" class="transition-fade">
+        <div id="content-wrapper" class="content-wrapper">
+            <!-- Hero Section -->
+            <section id="home" class="content-block left">
+                <div class="content-box text-left p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <h1 class="text-4xl md:text-5xl font-montserrat font-black mb-4">
+                        <span class="text-white">AI-Powered</span>
+                        <span class="block gold">Digital Transformation</span>
+                    </h1>
+                    <p class="text-lg text-white mb-6">
+                        Innovate. Secure. Automate. We build the immersive web experiences of tomorrow.
+                    </p>
+                    <p class="text-sm text-white/80">Scroll to begin the journey</p>
+                </div>
+            </section>
 
+            <!-- Stats Section -->
+            <section id="stats" class="content-block right">
+                 <div class="content-box text-center p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4">
+                        <div>
+                            <h3 class="text-3xl md:text-4xl font-bold gold">70+</h3>
+                            <p class="text-white text-sm">Businesses Transformed</p>
+                        </div>
+                         <div>
+                            <h3 class="text-3xl md:text-4xl font-bold gold">99.9%</h3>
+                            <p class="text-white text-sm">Security Uptime</p>
+                        </div>
+                         <div>
+                            <h3 class="text-3xl md:text-4xl font-bold gold">24/7</h3>
+                            <p class="text-white text-sm">Global Support</p>
+                        </div>
+                    </div>
+                 </div>
+            </section>
 
+            <!-- About Us Section -->
+            <section id="about" class="content-block left">
+                 <div class="content-box text-left p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <h2 class="text-3xl font-bold mb-6 text-white">About Us</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="text-xl font-bold gold mb-2">Our Vision</h3>
+                            <p class="text-white text-sm">To empower businesses with next-generation digital solutions, AI-driven automation, and seamless technology integration.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold gold mb-2">Our Mission</h3>
+                            <p class="text-white text-sm">To revolutionize industries by providing cutting-edge web development, AI, robotics, and cybersecurity solutions.</p>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+
+            <!-- Our Story Section -->
+            <section id="story" class="content-block right">
+                 <div class="content-box text-left p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <h2 class="text-3xl font-bold mb-6 gold">Our Story</h2>
+                    <p class="text-white text-sm">Diradz Solutions combines smart digital transformation, deep AI-powered customization, and robust security to deliver accessible, scalable solutions worldwide. Founded in Bengaluru, we are expanding globally with a strong focus on innovation and client success.</p>
+                 </div>
+            </section>
+
+            <!-- Solutions Section -->
+            <section id="solutions" class="content-block left">
+                <div class="content-box text-left p-6 md:p-8" style="max-width: 600px;" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <h2 class="text-3xl font-bold mb-6 text-white">Our Solutions</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-bold text-lg gold mb-2">AI & Automation</h3>
+                            <ul class="text-xs text-white list-disc list-inside space-y-1">
+                                <li>AI-powered web and app development</li>
+                                <li>Robotics software integration</li>
+                                <li>Predictive analytics for business insights</li>
+                                <li>AI-driven chatbots & virtual assistants</li>
+                                <li>Decision-making AI tools</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <h3 class="font-bold text-lg gold mb-2">IT & Cybersecurity</h3>
+                            <ul class="text-xs text-white list-disc list-inside space-y-1">
+                                <li>End-to-end cybersecurity frameworks</li>
+                                <li>Cloud computing & data protection</li>
+                                <li>IT infrastructure setup and management</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <h3 class="font-bold text-lg gold mb-2">Business Optimization</h3>
+                            <ul class="text-xs text-white list-disc list-inside space-y-1">
+                                <li>Workflow automation & intelligent dashboards</li>
+                                <li>IoT-enabled smart business processes</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <h3 class="font-bold text-lg gold mb-2">Technology Integration</h3>
+                            <ul class="text-xs text-white list-disc list-inside space-y-1">
+                                <li>Custom software, ERP & CRM integration</li>
+                                <li>Digital marketing solutions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="solutions.html" class="mt-6 inline-block font-bold text-white py-2 px-6 rounded-md border border-white hover:text-gold hover:border-gold transition duration-300 text-sm">
+                        Explore All Services
+                    </a>
+                </div>
+            </section>
+
+            <!-- Global Reach Section -->
+            <section id="global-reach" class="content-block right">
+                 <div class="content-box text-left p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <h2 class="text-3xl font-bold mb-6"><span class="text-white">Global</span> <span class="gold">Roadmap</span></h2>
+                      <ul class="space-y-2 text-sm text-white list-disc list-inside">
+                          <li><strong>Market Reach:</strong> Serving North America, Europe, & Asia.</li>
+                          <li><strong>Tech Expansion:</strong> Investing in AI, cybersecurity, and robotics.</li>
+                          <li><strong>Geographic Growth:</strong> Expanding into Southeast Asia & the Middle East.</li>
+                      </ul>
+                 </div>
+            </section>
+
+            <!-- Blog Teaser Section -->
+            <section id="blog-teaser" class="content-block left">
+                 <div class="content-box text-center p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <h2 class="text-3xl font-bold mb-6"><span class="text-white">Insights &</span> <span class="gold">Innovations</span></h2>
+                    <p class="text-white mb-4 text-sm">Explore our latest articles on the future of digital transformation.</p>
+                    <a href="blog.html" class="mt-6 inline-block font-bold text-white py-2 px-6 rounded-md border border-white hover:text-gold hover:border-gold transition duration-300 text-sm">
+                        Visit Our Blog
+                    </a>
+                 </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="content-block right">
+                <div class="content-box text-left p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+                      <h2 class="text-3xl font-bold mb-6"><span class="text-white">Connect</span> <span class="gold">With Us</span></h2>
+                      <form name="contact" method="POST" data-netlify="true" class="space-y-3">
+                          <input type="hidden" name="form-name" value="contact" />
+                          <input type="text" name="name" placeholder="Your Name" class="w-full bg-gray-800/50 text-white p-2 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition text-sm" required>
+                          <input type="email" name="email" placeholder="Your Email" class="w-full bg-gray-800/50 text-white p-2 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition text-sm" required>
+                          <textarea name="message" placeholder="Your Message" rows="2" class="w-full bg-gray-800/50 text-white p-2 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition text-sm" required></textarea>
+                          <button type="submit" class="w-full bg-gold text-black font-bold py-2 px-6 rounded-md hover:brightness-110 transition duration-300 text-sm">Send Message</button>
+                    </form>
+                 </div>
+            </section>
+            
+            <!-- Office Location Section -->
+            <section id="office" class="content-block left">
+                <div class="content-box text-left p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <h2 class="text-3xl font-bold mb-6"><span class="text-white">Our</span> <span class="gold">Office</span></h2>
+                    <address class="not-italic text-white text-sm">
+                        #72/2, Sulikunte, Sarjapur Road,<br>
+                        Bengaluru, Karnataka 562125
+                    </address>
+                    <p class="text-white text-sm mt-4">
+                        <strong>Phone:</strong> <a href="tel:+919100536320" class="hover:text-gold transition-colors">+91 91005 36320</a>
+                    </p>
+                    <div class="mt-6 rounded-lg overflow-hidden border border-gold/20">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.858999317586!2d77.75895781529559!3d12.916843090892042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0d7deb1eaaaa%3A0xb695e6fbed3607e0!2sSulikunte%2C%2C%20Karnataka%20562125!5e0!3m2!1sen!2sin!4v1668584852925!5m2!1sen!2sin"
+                            class="w-full h-48"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+            <footer class="footer">
+                <div class="container mx-auto">
+                    <div class="mb-6">
+                        <p class="text-white mb-4">Follow us on</p>
+                        <div class="flex justify-center items-center space-x-6">
+                            <a href="https://www.facebook.com/share/17E2G5q1XD/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                            </a>
+                             <a href="https://www.instagram.com/kamaldharmarealty?igsh=MTIyaHY0ZHF6a2ljeQ==" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm0 1.623c-2.393 0-2.713.01-3.664.058-1.144.053-1.62.224-1.932.348-.45.18-.73.398-1.018.688a2.81 2.81 0 00-.688 1.018c-.123.312-.295.788-.348 1.932-.048.95-.058 1.271-.058 3.664s.01 2.713.058 3.664c.053 1.144.224 1.62.348 1.932.18.45.398.73.688 1.018a2.81 2.81 0 001.018.688c.312.123.788.295 1.932.348.95.048 1.271.058 3.664.058s2.713-.01 3.664-.058c1.144-.053 1.62-.224 1.932-.348.45-.18-.73-.398 1.018-.688a2.81 2.81 0 00.688-1.018c.123-.312.295-.788.348-1.932.048-.95.058-1.271.058-3.664s-.01-2.713-.058-3.664c-.053-1.144-.224-1.62-.348-1.932a2.81 2.81 0 00-.688-1.018c-.288-.288-.568-.508-1.018-.688-.312-.123-.788-.295-1.932-.348C15.028 3.633 14.708 3.623 12.315 3.623z" clip-rule="evenodd" /><path d="M12 8.118a3.882 3.882 0 100 7.764 3.882 3.882 0 000-7.764zM12 14.3a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z"/><path d="M16.882 7.118a.97.97 0 100-1.94.97.97 0 000 1.94z"/></svg>
+                             </a>
+                             <a href="https://x.com/iamkamaldharma?t=dfBtSwRhs4IOR3B-cPSBg&s=09" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                             </a>
+                             <a href="https://wa.me/message/E7C24NJUAKAH1" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.85L2 22l5.25-1.38c1.41.75 3 1.13 4.75 1.13h.04c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.84-9.91-9.84zm4.53 12.28c-.28.42-1.03.78-1.42.83s-.84.05-1.29-.15c-.45-.2-1.02-.48-1.92-1.13c-.9-.65-1.5-1.46-1.72-1.71c-.22-.25-.45-.51-.45-.83s0-.5.15-.65c.15-.15.34-.2.45-.2s.25,0,.38.05c.13.05.28.33.34.42s.08.18.11.28c.03.1.04.15,0,.25c-.04.1-.11.18-.21.28c-.1.1-.21.23-.28.32c-.08.08-.15.17-.04.32c.11.15.48.63.95 1.05c.47.42.87.56 1.02.63c.15.07.24.06.34-.04c.1-.1.42-.48.53-.63c.11-.15.21-.15.34-.1s.41.2.48.25c.07.05.12.08.14.12c.02.04.02.24-.06.48z"/></svg>
+                             </a>
+                        </div>
+                    </div>
+                    <div class="text-gray-400 text-xs mt-6 border-t border-gray-800 pt-6">
+                        <a href="privacy.html" class="hover:text-gold transition-colors">Privacy Policy</a>
+                        <span class="mx-2">|</span>
+                        <span>© 2025 Diradz Solutions. All Rights Reserved.</span>
+                        <p class="mt-2">Pioneering the Future of Digital Intelligence.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const clock = new THREE.Clock();
-           
-            // Scene setup
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 5;
-            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setClearColor(0x0a192f, 1);
+            const isSandboxed = window.origin === 'null' || window.origin.includes('usercontent.goog');
 
+            function initPage() {
+                // Mobile Menu Toggle
+                const menuBtn = document.getElementById('menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const openIcon = document.getElementById('menu-open-icon');
+                const closeIcon = document.getElementById('menu-close-icon');
 
-            let dna;
-            let stars;
-
-
-            function createDna() {
-                const points = [];
-                const colors = [];
-                const numPoints = 10000;
-                const radius = 2;
-                const turns = 8;
-                const height = 20;
-
-
-                const color1 = new THREE.Color("#ff00ff");
-                const color2 = new THREE.Color("#e6e6fa");
-
-
-                for (let i = 0; i < numPoints; i++) {
-                    const t = i / numPoints;
-                    const angle = t * Math.PI * 2 * turns;
-                    const y = (t - 0.5) * height;
-
-
-                    points.push(radius * Math.cos(angle), y, radius * Math.sin(angle));
-                    const color = new THREE.Color().copy(color1).lerp(color2, t);
-                    colors.push(color.r, color.g, color.b);
-
-
-                    points.push(radius * Math.cos(angle + Math.PI), y, radius * Math.sin(angle + Math.PI));
-                    colors.push(color.r, color.g, color.b);
+                if (menuBtn) {
+                    menuBtn.addEventListener('click', () => {
+                        mobileMenu.classList.toggle('hidden');
+                        openIcon.classList.toggle('hidden');
+                        closeIcon.classList.toggle('hidden');
+                    });
                 }
-
-
-                const geometry = new THREE.BufferGeometry();
-                geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
-                geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-
-
-                const material = new THREE.PointsMaterial({
-                    size: 0.05,
-                    vertexColors: true,
-                    transparent: true,
-                    opacity: 0.7,
-                    blending: THREE.AdditiveBlending
+                
+                // Close mobile menu when a link is clicked
+                document.querySelectorAll('#mobile-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        openIcon.classList.remove('hidden');
+                        closeIcon.classList.add('hidden');
+                    });
                 });
 
+                if (document.querySelector('#webgl-canvas')) {
+                    const clock = new THREE.Clock();
+                    const isMobile = window.innerWidth < 768;
+                    
+                    const scene = new THREE.Scene();
+                    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    camera.position.z = 5;
+                    
+                    const renderer = new THREE.WebGLRenderer({
+                        canvas: document.getElementById('webgl-canvas'),
+                        antialias: !isMobile,
+                        alpha: true
+                    });
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+                    renderer.setClearColor(0x0a192f, 1);
 
-                dna = new THREE.Points(geometry, material);
-                dna.rotation.x = Math.PI / 4;
-                scene.add(dna);
-            }
+                    let dna;
+                    let stars;
 
+                    function createDna() {
+                        const points = [];
+                        const colors = [];
+                        const numPoints = isMobile ? 3000 : 10000;
+                        const radius = 2;
+                        const turns = 8;
+                        const height = 20;
 
-            function createStars() {
-                const starGeometry = new THREE.BufferGeometry();
-                const starMaterial = new THREE.PointsMaterial({
-                    color: 0xffffff,
-                    size: 0.02,
-                    transparent: true,
-                    opacity: 0.5
-                });
+                        const color1 = new THREE.Color("hsl(40, 55%, 52%)"); // Gold color
+                        const color2 = new THREE.Color("#ffffff");
 
+                        for (let i = 0; i < numPoints; i++) {
+                            const t = i / numPoints;
+                            const angle = t * Math.PI * 2 * turns;
+                            const y = (t - 0.5) * height;
 
-                const starVertices = [];
-                for (let i = 0; i < 15000; i++) {
-                    const x = (Math.random() - 0.5) * 200;
-                    const y = (Math.random() - 0.5) * 200;
-                    const z = (Math.random() - 0.5) * 200;
-                    starVertices.push(x, y, z);
-                }
+                            points.push(radius * Math.cos(angle), y, radius * Math.sin(angle));
+                            const color = new THREE.Color().copy(color1).lerp(color2, t);
+                            colors.push(color.r, color.g, color.b);
 
+                            points.push(radius * Math.cos(angle + Math.PI), y, radius * Math.sin(angle + Math.PI));
+                            colors.push(color.r, color.g, color.b);
+                        }
 
-                starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-                stars = new THREE.Points(starGeometry, starMaterial);
-                scene.add(stars);
-            }
+                        const geometry = new THREE.BufferGeometry();
+                        geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+                        geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
+                        const material = new THREE.PointsMaterial({
+                            size: 0.05,
+                            vertexColors: true,
+                            transparent: true,
+                            opacity: 0.6, // Slightly reduced opacity for a softer look
+                            blending: THREE.AdditiveBlending
+                        });
 
-            createDna();
-            createStars();
-           
-            // GSAP Scroll Animation
-            gsap.registerPlugin(ScrollTrigger);
-            const contentWrapper = document.getElementById('content-wrapper');
-
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: contentWrapper,
-                    start: 'top top',
-                    end: 'bottom bottom',
-                    scrub: 1.5,
-                }
-            });
-
-
-            tl.to(dna.rotation, { y: Math.PI * 4 })
-              .to(camera.position, { z: 3.5 }, 0);
-
-
-            // Content fade-in and movement
-            const sections = gsap.utils.toArray('.content-block');
-            sections.forEach((section) => {
-                const contentBox = section.querySelector('.content-box');
-                const isLeft = section.classList.contains('left');
-               
-                gsap.from(contentBox, {
-                    opacity: 0,
-                    x: isLeft ? -200 : 200,
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top 80%',
-                        end: 'center center',
-                        scrub: 1,
+                        dna = new THREE.Points(geometry, material);
+                        dna.rotation.x = Math.PI / 4;
+                        scene.add(dna);
                     }
-                });
-            });
-           
-            // --- Mouse Interaction ---
-            const cameraGroup = new THREE.Group();
-            cameraGroup.add(camera);
-            scene.add(cameraGroup);
 
+                    function createStars() {
+                        const starGeometry = new THREE.BufferGeometry();
+                        const starMaterial = new THREE.PointsMaterial({
+                            color: 0xffffff,
+                            size: 0.02,
+                            transparent: true,
+                            opacity: 0.5
+                        });
 
-            const cameraX = gsap.quickTo(cameraGroup.rotation, "y", { duration: 0.8, ease: "power3.out" });
-            const cameraY = gsap.quickTo(cameraGroup.rotation, "x", { duration: 0.8, ease: "power3.out" });
+                        const starVertices = [];
+                        const numStars = isMobile ? 2000 : 15000;
+                        for (let i = 0; i < numStars; i++) {
+                            const x = (Math.random() - 0.5) * 200;
+                            const y = (Math.random() - 0.5) * 200;
+                            const z = (Math.random() - 0.5) * 200;
+                            starVertices.push(x, y, z);
+                        }
 
+                        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+                        stars = new THREE.Points(starGeometry, starMaterial);
+                        scene.add(stars);
+                    }
 
-            window.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth - 0.5) * 0.5;
-                const y = (e.clientY / window.innerHeight - 0.5) * 0.5;
-               
-                cameraX(x);
-                cameraY(-y);
-            });
+                    createDna();
+                    createStars();
+                    
+                    gsap.registerPlugin(ScrollTrigger);
+                    const contentWrapper = document.getElementById('content-wrapper');
 
+                    if (contentWrapper) {
+                        const tl = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: contentWrapper,
+                                start: 'top top',
+                                end: 'bottom bottom',
+                                scrub: 1.5,
+                            }
+                        });
 
-            // Animate loop
-            function animate() {
-                requestAnimationFrame(animate);
-                const elapsedTime = clock.getElapsedTime();
+                        tl.to(dna.rotation, { y: Math.PI * 4 })
+                          .to(camera.position, { z: 3.5 }, 0);
 
-
-                if (dna) {
-                    dna.rotation.z = Math.sin(elapsedTime * 0.5) * 0.1;
-                }
-               
-                if (stars) {
-                    stars.rotation.y += 0.0001;
-                }
-
-
-                renderer.render(scene, camera);
-            }
-            animate();
-
-
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-           
-            // Smooth scroll for nav links
-             document.querySelectorAll('.header a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
+                        const sections = gsap.utils.toArray('.content-block');
+                        sections.forEach((section) => {
+                            const contentBox = section.querySelector('.content-box');
+                            const isLeft = section.classList.contains('left');
+                            
+                            gsap.from(contentBox, {
+                                opacity: 0,
+                                x: isLeft ? -100 : 100,
+                                duration: 1,
+                                scrollTrigger: {
+                                    trigger: section,
+                                    start: 'top 85%',
+                                    end: 'top 50%',
+                                    scrub: 1,
+                                }
+                            });
                         });
                     }
+                    
+                    const cameraGroup = new THREE.Group();
+                    cameraGroup.add(camera);
+                    scene.add(cameraGroup);
+
+                    const cameraX = gsap.quickTo(cameraGroup.rotation, "y", { duration: 0.8, ease: "power3.out" });
+                    const cameraY = gsap.quickTo(cameraGroup.rotation, "x", { duration: 0.8, ease: "power3.out" });
+
+                    window.addEventListener('mousemove', (e) => {
+                        const x = (e.clientX / window.innerWidth - 0.5) * 0.25;
+                        const y = (e.clientY / window.innerHeight - 0.5) * 0.25;
+                        
+                        cameraX(x);
+                        cameraY(-y);
+                    });
+
+                    function animate() {
+                        requestAnimationFrame(animate);
+                        const elapsedTime = clock.getElapsedTime();
+
+                        if (dna) {
+                            dna.rotation.z = Math.sin(elapsedTime * 0.5) * 0.1;
+                        }
+                        
+                        if (stars) {
+                            stars.rotation.y += 0.0001;
+                        }
+
+                        renderer.render(scene, camera);
+                    }
+                    
+                    animate();
+
+                    window.addEventListener('resize', () => {
+                        camera.aspect = window.innerWidth / window.innerHeight;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(window.innerWidth, window.innerHeight);
+                    });
+                }
+                
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                     anchor.addEventListener('click', function (e) {
+                         e.preventDefault();
+                         const targetId = this.getAttribute('href');
+                         const targetElement = document.querySelector(targetId);
+                         if(targetElement) {
+                             targetElement.scrollIntoView({
+                                 behavior: 'smooth'
+                             });
+                         }
+                     });
+                 });
+                
+                VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+                    max: 5,
+                    speed: 400,
+                    perspective: 1000,
                 });
-            });
+            }
+            
+            if (!isSandboxed) {
+                const swup = new Swup({
+                    containers: ["#swup"],
+                    animationSelector: '[class*="transition-"]'
+                });
+                
+                initPage();
+                swup.hooks.on('page:view', initPage);
+            } else {
+                 console.warn('Swup page transitions are disabled in this sandboxed environment.');
+                 initPage();
+            }
         });
     </script>
 </body>
 </html>
-
-
-
-
 
