@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diradz Solutions - AI-Powered Digital Transformation</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Diradz Solutions - Best Website & App Developer in Bangalore</title>
+    <meta name="description" content="Diradz Solutions is the best website developer in Bangalore, offering AI-powered web and app development, digital marketing, and custom software integration. Your expert web app building company.">
+    <meta name="keywords" content="Best Website developer in Bangalore, Website building company in Bangalore, Web app building company, AI-powered web and app development, digital marketing company, AI & Automation Solutions, Workflow automation and intelligent dashboards, Custom software, ERP & CRM integration">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,38 +54,28 @@
             position: relative;
             z-index: 2;
         }
-        .section-divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--diradz-gold), #FFFF00, var(--diradz-gold), transparent);
-            opacity: 0.5;
-            margin: 4rem 0;
+        .industry-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease;
         }
-        .service-card, .blog-card {
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
+        .industry-card:hover {
+            transform: scale(1.05);
         }
-        .service-card:hover, .blog-card:hover {
-            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+        .industry-card img {
+            transition: transform 0.3s ease;
         }
-        .timeline-point {
-            transition: transform 0.3s, box-shadow 0.3s;
+        .industry-card:hover img {
+            transform: scale(1.1);
         }
-        .timeline-point:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 20px var(--diradz-gold);
-        }
-        .product-card {
-            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
-        }
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(201, 144, 64, 0.2);
-        }
-        .case-study-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 1rem;
-            border: 1px solid rgba(201, 144, 64, 0.2);
+        .industry-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 1rem;
         }
         .nav-link {
             position: relative;
@@ -129,10 +124,8 @@
             <div class="hidden lg:flex space-x-4 items-center">
                 <a href="#home" class="nav-link text-white font-semibold text-sm">Home</a>
                 <a href="#about" class="nav-link text-white font-semibold text-sm">About Us</a>
-                <a href="#services" class="nav-link text-white font-semibold text-sm">Services</a>
-                <a href="#products" class="nav-link text-white font-semibold text-sm">Products</a>
-                <a href="#case-studies" class="nav-link text-white font-semibold text-sm">Case Studies</a>
-                <a href="#sustainability" class="nav-link text-white font-semibold text-sm">Sustainability</a>
+                <a href="#solutions" class="nav-link text-white font-semibold text-sm">Solutions</a>
+                <a href="#products-and-services" class="nav-link text-white font-semibold text-sm">Products and Services</a>
                 <a href="blog.html" target="_top" class="nav-link text-white font-semibold text-sm">Blog</a>
                 <a href="#contact" class="bg-royal-green text-white font-bold py-2 px-5 rounded-md hover:bg-gold hover:text-black transition duration-300 shadow-lg shadow-royal-green/30 text-sm">Contact Us</a>
             </div>
@@ -144,10 +137,8 @@
         <div id="mobile-menu" class="hidden lg:hidden">
             <a href="#home" class="block py-2 px-6 text-white hover:bg-royal-green">Home</a>
             <a href="#about" class="block py-2 px-6 text-white hover:bg-royal-green">About Us</a>
-            <a href="#services" class="block py-2 px-6 text-white hover:bg-royal-green">Services</a>
-            <a href="#products" class="block py-2 px-6 text-white hover:bg-royal-green">Products</a>
-            <a href="#case-studies" class="block py-2 px-6 text-white hover:bg-royal-green">Case Studies</a>
-            <a href="#sustainability" class="block py-2 px-6 text-white hover:bg-royal-green">Sustainability</a>
+            <a href="#solutions" class="block py-2 px-6 text-white hover:bg-royal-green">Solutions</a>
+            <a href="#products-and-services" class="block py-2 px-6 text-white hover:bg-royal-green">Products and Services</a>
             <a href="blog.html" target="_top" class="block py-2 px-6 text-white hover:bg-royal-green">Blog</a>
             <a href="#contact" class="block py-2 px-6 text-white bg-royal-green/80 hover:bg-royal-green">Contact Us</a>
         </div>
@@ -165,14 +156,11 @@
                 <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up">
                     Innovate. Secure. Automate. Lead the Future.
                 </p>
-                <a href="#services" class="pulse-button bg-royal-green text-white font-bold py-3 px-8 rounded-md text-lg transition duration-300 transform hover:scale-105 shadow-gold uppercase tracking-wider">
+                <a href="#solutions" class="pulse-button bg-royal-green text-white font-bold py-3 px-8 rounded-md text-lg transition duration-300 transform hover:scale-105 shadow-gold uppercase tracking-wider">
                     Start Your Journey
                 </a>
             </div>
-            <!-- 3D Robot Mascot placeholder -->
-            <div id="robot-mascot" class="fixed bottom-4 right-4 z-40 w-24 h-24 md:w-32 md:h-32 transition-transform duration-500">
-                 <!-- Robot will be rendered here via JS -->
-            </div>
+
         </section>
 
         <!-- Clients & Stats Section -->
@@ -218,10 +206,10 @@
             </div>
         </section>
 
-        <!-- Our Services Section -->
-        <section id="services" class="py-20 bg-black">
+        <!-- Our Solutions Section -->
+        <section id="solutions" class="py-20 bg-black">
             <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Our</span> <span class="gold">Services</span></h2>
+                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Our</span> <span class="gold">Solutions</span></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
                     
                     <div class="service-category bg-gray-900 p-8 rounded-xl border border-royal-green/50">
@@ -262,25 +250,23 @@
                 </div>
                 <div class="text-center mt-16">
                     <a href="solutions.html" target="_top" class="font-bold bg-gold text-black py-3 px-8 rounded-md hover:bg-royal-green hover:text-white transition duration-300 transform hover:scale-105 shadow-lg shadow-gold/30">
-                        Read More About Our Services
+                        Read More About Our Solutions
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Products Section -->
-        <section id="products" class="py-20 bg-gray-900/50">
+        <!-- Products and Services Section -->
+        <section id="products-and-services" class="py-20 bg-gray-900/50">
              <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Products &</span> <span class="gold">Solutions</span></h2>
+                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Products and</span> <span class="gold">Services</span></h2>
                 <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-10 text-center">
                     
-                    <!-- Product Showcase -->
                     <div class="product-feature p-6">
                         <h3 class="text-2xl font-bold royal-green mb-4">3D Interactive Product Showcase</h3>
                         <p class="text-gray-400">Explore our enterprise-grade robotics platforms, AI analytics dashboards, and robust cybersecurity defense systems in immersive 3D.</p>
                     </div>
                     
-                    <!-- Virtual Demos -->
                     <div class="product-feature p-6 border-x-2 border-gold/30">
                         <h3 class="text-2xl font-bold gold mb-4">Virtual Demos</h3>
                         <p class="text-gray-400 mb-4">Watch our products in action. See how our AI-powered insights and solutions can transform your operations.</p>
@@ -289,7 +275,6 @@
                         </div>
                     </div>
                     
-                    <!-- Downloadable Resources -->
                     <div class="product-feature p-6">
                         <h3 class="text-2xl font-bold royal-green mb-4">Downloadable Resources</h3>
                         <p class="text-gray-400 mb-4">Get detailed information about our technology. Download brochures and whitepapers to learn more.</p>
@@ -308,55 +293,99 @@
              </div>
         </section>
 
-
-        <!-- Case Studies Section -->
-        <section id="case-studies" class="py-20 bg-black">
+        <!-- Industries We Serve Section -->
+        <section id="industries" class="py-20 bg-black">
             <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Success</span> <span class="gold">Stories</span></h2>
-                <div class="space-y-12">
-                    <!-- Case Study 1 -->
-                    <div class="case-study-card p-8 grid md:grid-cols-3 gap-8 items-center">
-                        <div class="md:col-span-1">
-                            <h3 class="text-2xl font-bold text-white">LogiCorp Inc.</h3>
-                            <p class="text-royal-green font-semibold">Supply Chain Optimization</p>
-                        </div>
-                        <div class="md:col-span-2">
-                            <p class="text-gray-300 mb-4">"Diradz Solutions revolutionized our logistics. Their AI predicted demand with 98% accuracy, saving us millions."</p>
-                            <p class="font-bold"><span class="gold">40%</span> Reduction in operational costs. <span class="gold">60%</span> faster delivery times.</p>
-                        </div>
+                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Industries</span> <span class="gold">We Serve</span></h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                    <!-- B2B -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=B2B';" alt="B2B Solutions" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">B2B</h3></div>
                     </div>
-                    <!-- Case Study 2 -->
-                    <div class="case-study-card p-8 grid md:grid-cols-3 gap-8 items-center">
-                        <div class="md:col-span-1">
-                            <h3 class="text-2xl font-bold text-white">FinSecure Bank</h3>
-                            <p class="text-royal-green font-semibold">Fraud Detection</p>
-                        </div>
-                        <div class="md:col-span-2">
-                             <p class="text-gray-300 mb-4">"The Aegis Shield platform is unmatched. It identifies and neutralizes threats before they can impact our systems."</p>
-                            <p class="font-bold"><span class="gold">99.9%</span> reduction in fraudulent transactions. <span class="gold">Zero</span> successful breaches since implementation.</p>
-                        </div>
+                    <!-- Real Estate -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059ee41F?q=80&w=1973&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Real+Estate';" alt="Real Estate" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Real Estate</h3></div>
+                    </div>
+                    <!-- Fashion -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Fashion';" alt="Fashion Agencies" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Fashion</h3></div>
+                    </div>
+                    <!-- Ecommerce -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1555529771-835f59ee5020?q=80&w=1974&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Ecommerce';" alt="Ecommerce" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Ecommerce</h3></div>
+                    </div>
+                    <!-- Financial -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Financial';" alt="Financial Services" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Financial</h3></div>
+                    </div>
+                    <!-- Education -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Education';" alt="Education" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Education</h3></div>
+                    </div>
+                    <!-- Home Services -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Home+Services';" alt="Home Services" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Home Services</h3></div>
+                    </div>
+                    <!-- Healthcare -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=1974&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Healthcare';" alt="Healthcare" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Healthcare</h3></div>
+                    </div>
+                    <!-- Travel -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Travel';" alt="Travel" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Travel</h3></div>
+                    </div>
+                    <!-- Hospitality -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbb5eb?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Hospitality';" alt="Hospitality" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Hospitality</h3></div>
+                    </div>
+                    <!-- Automotive -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Automotive';" alt="Automotive" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Automotive</h3></div>
+                    </div>
+                    <!-- Pharmaceutical -->
+                    <div class="industry-card aspect-w-1 aspect-h-1">
+                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1935&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a0a0a/c99040?text=Pharma';" alt="Pharmaceutical" class="w-full h-full object-cover">
+                        <div class="overlay flex items-end"><h3 class="text-white font-bold text-lg">Pharmaceutical</h3></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Sustainability Section -->
-        <section id="sustainability" class="py-20 bg-gray-900/50">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4"><span class="royal-green">Innovating for a</span> <span class="gold">Greener Tomorrow</span></h2>
-                <p class="max-w-3xl mx-auto text-gray-300 mb-12">We believe technological advancement must go hand-in-hand with environmental responsibility. Our solutions are designed for peak performance and minimal ecological impact.</p>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="border-2 border-gold/30 rounded-lg p-6">
-                        <h3 class="text-3xl font-bold text-royal-green">35%</h3>
-                        <p class="text-gray-400">Reduced Energy Consumption for our clients through optimized IT infrastructure.</p>
+        <!-- Global Reach Section -->
+        <section id="global-reach" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Our Global Reach &</span> <span class="gold">Future Roadmap</span></h2>
+                <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    <!-- Global Market Reach -->
+                    <div class="p-6 border border-gold/20 rounded-lg">
+                        <h3 class="text-2xl font-bold gold mb-3">Global Market Reach</h3>
+                        <p class="text-gray-400">Currently serving businesses in North America, Europe, Asia, and expanding into emerging markets for AI and digital transformation.</p>
                     </div>
-                     <div class="border-2 border-gold/30 rounded-lg p-6">
-                        <h3 class="text-3xl font-bold text-gold">100%</h3>
-                        <p class="text-gray-400">Carbon Neutral Operations since 2024.</p>
+                    <!-- Tech Solutions Expansion -->
+                    <div class="p-6 border border-gold/20 rounded-lg">
+                        <h3 class="text-2xl font-bold royal-green mb-3">Tech Solutions Expansion</h3>
+                        <p class="text-gray-400">Investing in AI-driven automation, cybersecurity innovations, and robotics software to enhance business operations.</p>
                     </div>
-                     <div class="border-2 border-gold/30 rounded-lg p-6">
-                        <h3 class="text-3xl font-bold text-royal-green">500+ Tons</h3>
-                        <p class="text-gray-400">Of CO2 emissions prevented annually by our AI-powered resource management.</p>
+                    <!-- Geographic Growth -->
+                    <div class="p-6 border border-gold/20 rounded-lg">
+                        <h3 class="text-2xl font-bold gold mb-3">Geographic Growth</h3>
+                        <p class="text-gray-400">Expanding into new markets in Southeast Asia, the Middle East, and Africa to capitalize on digital transformation demand.</p>
+                    </div>
+                    <!-- Team & Infrastructure -->
+                    <div class="p-6 border border-gold/20 rounded-lg">
+                        <h3 class="text-2xl font-bold royal-green mb-3">Team & Infrastructure</h3>
+                        <p class="text-gray-400">Scaling workforce and cloud infrastructure to meet the increasing demand for AI-powered digital solutions.</p>
                     </div>
                 </div>
             </div>
@@ -400,38 +429,51 @@
         <section id="contact" class="py-20 bg-gray-900/50">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Connect</span> <span class="gold">With Us</span></h2>
-                <div class="max-w-4xl mx-auto bg-black p-8 rounded-lg border-2 border-gold/20">
-                    <form>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <input type="text" placeholder="Your Name" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-royal-green focus:outline-none transition">
-                            <input type="email" placeholder="Your Email" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-royal-green focus:outline-none transition">
+                <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
+                    <div class="bg-black p-8 rounded-lg border-2 border-gold/20">
+                        <form name="contact" method="POST" data-netlify="true">
+                            <input type="hidden" name="form-name" value="contact" />
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <input type="text" name="name" placeholder="Your Name" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-royal-green focus:outline-none transition" required>
+                                <input type="email" name="email" placeholder="Your Email" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-royal-green focus:outline-none transition" required>
+                            </div>
+                            <div class="mt-6">
+                                <input type="text" name="subject" placeholder="Subject" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition" required>
+                            </div>
+                            <div class="mt-6">
+                                <textarea name="message" placeholder="Your Message" rows="5" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition" required></textarea>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <button type="submit" class="bg-gold text-black font-bold py-3 px-8 rounded-full hover:bg-royal-green hover:text-white transition duration-300 transform hover:scale-105 shadow-lg shadow-gold/30">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="text-gray-300">
+                        <div class="mb-8">
+                            <h3 class="text-2xl font-bold gold mb-4">Our Office</h3>
+                            <p>#72/2, Sulikunte, Sarjapur Road,<br>Bengaluru, Karnataka 562125</p>
+                            <p class="mt-2"><strong>Phone:</strong> <a href="tel:+919100536320" class="hover:text-gold">+91 91005 36320</a></p>
                         </div>
-                        <div class="mt-6">
-                            <input type="text" placeholder="Subject" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition">
+                        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden border-2 border-gold/30">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.23192651152!2d77.7583348152865!3d12.89317539090687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae6d857876296b%3A0x8666579303534966!2sSulikunte%2C%20Bengaluru%2C%20Karnataka%20562125!5e0!3m2!1sen!2sin!4v1676543210987!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
-                        <div class="mt-6">
-                            <textarea placeholder="Your Message" rows="5" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition"></textarea>
-                        </div>
-                        <div class="mt-6 text-center">
-                            <button type="submit" class="bg-gold text-black font-bold py-3 px-8 rounded-full hover:bg-royal-green hover:text-white transition duration-300 transform hover:scale-105 shadow-lg shadow-gold/30">Send Message</button>
-                        </div>
-                    </form>
-                    <div class="mt-8 pt-8 border-t border-gold/20 text-center">
-                        <p class="text-gray-400 mb-4">Follow us on</p>
-                        <div class="flex justify-center items-center space-x-6">
-                            <a href="https://www.facebook.com/share/17E2G5q1XD/" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
-                            </a>
-                             <a href="https://www.instagram.com/kamaldharmarealty?igsh=MTIyaHY0ZHF6a2ljeQ==" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm0 1.623c-2.393 0-2.713.01-3.664.058-1.144.053-1.62.224-1.932.348-.45.18-.73.398-1.018.688a2.81 2.81 0 00-.688 1.018c-.123.312-.295.788-.348 1.932-.048.95-.058 1.271-.058 3.664s.01 2.713.058 3.664c.053 1.144.224 1.62.348 1.932.18.45.398.73.688 1.018a2.81 2.81 0 001.018.688c.312.123.788.295 1.932.348.95.048 1.271.058 3.664.058s2.713-.01 3.664-.058c1.144-.053 1.62-.224 1.932-.348.45-.18.73-.398 1.018-.688a2.81 2.81 0 00.688-1.018c.123-.312.295-.788.348-1.932.048-.95.058-1.271.058-3.664s-.01-2.713-.058-3.664c-.053-1.144-.224-1.62-.348-1.932a2.81 2.81 0 00-.688-1.018c-.288-.288-.568-.508-1.018-.688-.312-.123-.788-.295-1.932-.348C15.028 3.633 14.708 3.623 12.315 3.623z" clip-rule="evenodd" /><path d="M12 8.118a3.882 3.882 0 100 7.764 3.882 3.882 0 000-7.764zM12 14.3a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z"/><path d="M16.882 7.118a.97.97 0 100-1.94.97.97 0 000 1.94z"/></svg>
-                             </a>
-                             <a href="https://x.com/iamkamaldharma?t=dfBtXSwRhs4IOR3B-cPSBg&s=09" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
-                                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
-                             </a>
-                             <a href="https://wa.me/message/E7C245NJUAKAH1" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.85L2 22l5.25-1.38c1.41.75 3 1.13 4.75 1.13h.04c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.84-9.91-9.84zm4.53 12.28c-.28.42-1.03.78-1.42.83s-.84.05-1.29-.15c-.45-.2-1.02-.48-1.92-1.13c-.9-.65-1.5-1.46-1.72-1.71c-.22-.25-.45-.51-.45-.83s0-.5.15-.65c.15-.15.34-.2.45-.2s.25,0,.38.05c.13.05.28.33.34.42s.08.18.11.28c.03.1.04.15,0,.25c-.04.1-.11.18-.21.28c-.1.1-.21.23-.28.32c-.08.08-.15.17-.04.32c.11.15.48.63.95 1.05c.47.42.87.56 1.02.63c.15.07.24.06.34-.04c.1-.1.42-.48.53-.63c.11-.15.21-.15.34-.1s.41.2.48.25c.07.05.12.08.14.12c.02.04.02.24-.06.48z"/></svg>
-                             </a>
-                        </div>
+                    </div>
+                </div>
+                 <div class="mt-12 pt-8 border-t border-gold/20 text-center">
+                    <p class="text-gray-400 mb-4">Follow us on</p>
+                    <div class="flex justify-center items-center space-x-6">
+                        <a href="https://www.facebook.com/share/17E2G5q1XD/" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                        </a>
+                         <a href="https://www.instagram.com/kamaldharmarealty?igsh=MTIyaHY0ZHF6a2ljeQ==" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm0 1.623c-2.393 0-2.713.01-3.664.058-1.144.053-1.62.224-1.932.348-.45.18-.73.398-1.018.688a2.81 2.81 0 00-.688 1.018c-.123.312-.295.788-.348 1.932-.048.95-.058 1.271-.058 3.664s.01 2.713.058 3.664c.053 1.144.224 1.62.348 1.932.18.45.398.73.688 1.018a2.81 2.81 0 001.018.688c.312.123.788.295 1.932.348.95.048 1.271.058 3.664.058s2.713-.01 3.664-.058c1.144-.053 1.62-.224 1.932-.348.45-.18.73-.398 1.018-.688a2.81 2.81 0 00.688-1.018c.123-.312.295-.788.348-1.932.048-.95.058-1.271.058-3.664s-.01-2.713-.058-3.664c-.053-1.144-.224-1.62-.348-1.932a2.81 2.81 0 00-.688-1.018c-.288-.288-.568-.508-1.018-.688-.312-.123-.788-.295-1.932-.348C15.028 3.633 14.708 3.623 12.315 3.623z" clip-rule="evenodd" /><path d="M12 8.118a3.882 3.882 0 100 7.764 3.882 3.882 0 000-7.764zM12 14.3a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z"/><path d="M16.882 7.118a.97.97 0 100-1.94.97.97 0 000 1.94z"/></svg>
+                         </a>
+                         <a href="https://x.com/iamkamaldharma?t=dfBtXSwRhs4IOR3B-cPSBg&s=09" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
+                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                         </a>
+                         <a href="https://wa.me/message/E7C245NJUAKAH1" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.85L2 22l5.25-1.38c1.41.75 3 1.13 4.75 1.13h.04c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.84-9.91-9.84zm4.53 12.28c-.28.42-1.03.78-1.42.83s-.84.05-1.29-.15c-.45-.2-1.02-.48-1.92-1.13c-.9-.65-1.5-1.46-1.72-1.71c-.22-.25-.45-.51-.45-.83s0-.5.15-.65c.15-.15.34-.2.45-.2s.25,0,.38.05c.13.05.28.33.34.42s.08.18.11.28c.03.1.04.15,0,.25c-.04.1-.11.18-.21.28c-.1.1-.21.23-.28.32c-.08.08-.15.17-.04.32c.11.15.48.63.95 1.05c.47.42.87.56 1.02.63c.15.07.24.06.34-.04c.1-.1.42-.48.53-.63c.11-.15.21-.15.34-.1s.41.2.48.25c.07.05.12.08.14.12c.02.04.02.24-.06.48z"/></svg>
+                         </a>
                     </div>
                 </div>
             </div>
@@ -441,6 +483,9 @@
     <!-- Footer -->
     <footer class="bg-black border-t border-gold/20 py-8">
         <div class="container mx-auto px-6 text-center text-gray-400">
+            <p class="mb-2">
+                <a href="privacy.html" target="_top" class="hover:text-gold transition-colors">Privacy Policy</a>
+            </p>
             <p>&copy; 2025 Diradz Solutions. All Rights Reserved.</p>
             <p class="text-sm">Pioneering the Future of Digital Intelligence.</p>
         </div>
@@ -681,723 +726,7 @@
         }
 
         function robotAnimate() {
-            requestAnimationFrame(robotAnimate);
-            const delta = clock.getDelta();
-            if (robotMixer) robotMixer.update(delta);
-            
-            // Simple hover animation
-            if(robotModel) {
-                 robotModel.rotation.y = Math.sin(Date.now() * 0.001) * 0.3;
-                 robotModel.position.y = Math.sin(Date.now() * 0.002) * 0.05;
-            }
-
-            robotRenderer.render(robotScene, robotCamera);
-        }
-        
-        // Scroll reaction for robot
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-             if(robotModel) {
-                const scrollY = window.scrollY;
-                const direction = scrollY > lastScrollY ? 1 : -1;
-                gsap.to(robotModel.rotation, { z: `+=${direction * 0.2}`, duration: 0.5 });
-                lastScrollY = scrollY;
-             }
-        });
-
-
-        initRobot();
-
-
-    </script>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diradz Solutions - AI-Powered Digital Transformation</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
-    <style>
-        :root {
-            --diradz-gold: #c99040;
-        }
-        body {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-        }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .royal-green { color: #006A4E; }
-        .bg-royal-green { background-color: #006A4E; }
-        .border-royal-green { border-color: #006A4E; }
-        .gold { color: var(--diradz-gold); }
-        .bg-gold { background-color: var(--diradz-gold); }
-        .border-gold { border-color: var(--diradz-gold); }
-        .neon-yellow { color: #FFFF00; }
-        .shadow-gold { box-shadow: 0 0 15px var(--diradz-gold); }
-        .shadow-green { box-shadow: 0 0 15px #006A4E; }
-        .diradz-glow {
-            text-shadow: 0 0 8px var(--diradz-gold), 0 0 10px var(--diradz-gold);
-        }
-
-        .hero-canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 1;
-            cursor: pointer;
-        }
-        .content-overlay {
-            position: relative;
-            z-index: 2;
-        }
-        .section-divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--diradz-gold), #FFFF00, var(--diradz-gold), transparent);
-            opacity: 0.5;
-            margin: 4rem 0;
-        }
-        .service-card, .blog-card {
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-        }
-        .service-card:hover, .blog-card:hover {
-            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
-        }
-        .timeline-point {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .timeline-point:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 20px var(--diradz-gold);
-        }
-        .product-card {
-            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
-        }
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(201, 144, 64, 0.2);
-        }
-        .case-study-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 1rem;
-            border: 1px solid rgba(201, 144, 64, 0.2);
-        }
-        .nav-link {
-            position: relative;
-            transition: color 0.3s;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--diradz-gold);
-            transition: width 0.3s;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .nav-link:hover {
-            color: var(--diradz-gold);
-        }
-        .pulse-button {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 106, 78, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(0, 106, 78, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 106, 78, 0); }
-        }
-        .social-icon:hover {
-            transform: scale(1.2);
-            color: var(--diradz-gold);
-        }
-    </style>
-</head>
-<body class="bg-black">
-
-    <!-- Header -->
-    <header id="header" class="fixed top-0 left-0 w-full bg-black bg-opacity-50 backdrop-blur-md z-50 transition-all duration-300">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-montserrat font-black flex items-center gap-2">
-                <span class="diradz-glow gold">DIRADZ</span>
-                <span class="gold border-2 border-gold px-2 py-1">SOLUTIONS</span>
-            </a>
-            <div class="hidden lg:flex space-x-4 items-center">
-                <a href="#home" class="nav-link text-white font-semibold text-sm">Home</a>
-                <a href="#about" class="nav-link text-white font-semibold text-sm">About Us</a>
-                <a href="#services" class="nav-link text-white font-semibold text-sm">Services</a>
-                <a href="#products" class="nav-link text-white font-semibold text-sm">Products</a>
-                <a href="#case-studies" class="nav-link text-white font-semibold text-sm">Case Studies</a>
-                <a href="#sustainability" class="nav-link text-white font-semibold text-sm">Sustainability</a>
-                <a href="blog.html" target="_top" class="nav-link text-white font-semibold text-sm">Blog</a>
-                <a href="#contact" class="bg-royal-green text-white font-bold py-2 px-5 rounded-md hover:bg-gold hover:text-black transition duration-300 shadow-lg shadow-royal-green/30 text-sm">Contact Us</a>
-            </div>
-            <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden">
-            <a href="#home" class="block py-2 px-6 text-white hover:bg-royal-green">Home</a>
-            <a href="#about" class="block py-2 px-6 text-white hover:bg-royal-green">About Us</a>
-            <a href="#services" class="block py-2 px-6 text-white hover:bg-royal-green">Services</a>
-            <a href="#products" class="block py-2 px-6 text-white hover:bg-royal-green">Products</a>
-            <a href="#case-studies" class="block py-2 px-6 text-white hover:bg-royal-green">Case Studies</a>
-            <a href="#sustainability" class="block py-2 px-6 text-white hover:bg-royal-green">Sustainability</a>
-            <a href="blog.html" target="_top" class="block py-2 px-6 text-white hover:bg-royal-green">Blog</a>
-            <a href="#contact" class="block py-2 px-6 text-white bg-royal-green/80 hover:bg-royal-green">Contact Us</a>
-        </div>
-    </header>
-
-    <main>
-        <!-- Home Section -->
-        <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-            <div class="hero-canvas-container" id="hero-canvas-container"></div>
-            <div class="content-overlay p-6">
-                <h1 class="text-3xl md:text-5xl font-montserrat font-black mb-4 animate-fade-in-down">
-                    <span class="text-white">AI-Powered Digital Transformation</span>
-                    <span class="block gold text-2xl md:text-4xl mt-2">for Tomorrow's Leaders</span>
-                </h1>
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up">
-                    Innovate. Secure. Automate. Lead the Future.
-                </p>
-                <a href="#services" class="pulse-button bg-royal-green text-white font-bold py-3 px-8 rounded-md text-lg transition duration-300 transform hover:scale-105 shadow-gold uppercase tracking-wider">
-                    Start Your Journey
-                </a>
-            </div>
-            <!-- 3D Robot Mascot placeholder -->
-            <div id="robot-mascot" class="fixed bottom-4 right-4 z-40 w-24 h-24 md:w-32 md:h-32 transition-transform duration-500">
-                 <!-- Robot will be rendered here via JS -->
-            </div>
-        </section>
-
-        <!-- Clients & Stats Section -->
-        <section class="py-12 bg-black">
-            <div class="container mx-auto px-6 text-center">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                    <div class="stat-item">
-                        <h3 class="text-4xl font-bold neon-yellow">70+</h3>
-                        <p class="text-gray-400">Businesses Transformed</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 class="text-4xl font-bold neon-yellow">99.9%</h3>
-                        <p class="text-gray-400">Security Uptime</p>
-                    </div>
-                     <div class="stat-item">
-                        <h3 class="text-4xl font-bold neon-yellow">24/7</h3>
-                        <p class="text-gray-400">Global Support</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Us Section -->
-        <section id="about" class="py-20 bg-gray-900/50">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">About</span> <span class="gold">Us</span></h2>
-                <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-2xl font-bold gold mb-3">Our Vision</h3>
-                            <p class="text-gray-300">To empower businesses with next-generation digital solutions, AI-driven automation, and seamless technology integration.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold royal-green mb-3">Our Mission</h3>
-                            <p class="text-gray-300">To revolutionize industries by providing cutting-edge web development, AI, robotics, and cybersecurity solutions, ensuring sustained growth and digital success.</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold gold mb-3">Our Story</h3>
-                        <p class="text-gray-300">Diradz combines smart digital transformation, deep AI-powered customization, seamless IT automation, and robust security to deliver accessible, scalable solutions worldwide. Founded in Bengaluru, we are expanding globally with a strong focus on innovation and client success.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Our Services Section -->
-        <section id="services" class="py-20 bg-black">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Our</span> <span class="gold">Services</span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                    
-                    <div class="service-category bg-gray-900 p-8 rounded-xl border border-royal-green/50">
-                        <h3 class="text-2xl font-bold gold mb-4">AI & Automation Solutions</h3>
-                        <ul class="list-disc list-inside text-gray-400 space-y-2">
-                            <li>AI-powered web and app development</li>
-                            <li>Robotics software integration</li>
-                            <li>Predictive analytics for business insights</li>
-                            <li>AI-driven chatbots & virtual assistants</li>
-                            <li>Decision-making AI tools</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-category bg-gray-900 p-8 rounded-xl border border-gold/50">
-                        <h3 class="text-2xl font-bold royal-green mb-4">IT Services & Cybersecurity</h3>
-                         <ul class="list-disc list-inside text-gray-400 space-y-2">
-                            <li>End-to-end cybersecurity frameworks</li>
-                            <li>Cloud computing & data protection</li>
-                            <li>IT infrastructure setup and management</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-category bg-gray-900 p-8 rounded-xl border border-gold/50">
-                        <h3 class="text-2xl font-bold royal-green mb-4">Business Optimization</h3>
-                         <ul class="list-disc list-inside text-gray-400 space-y-2">
-                            <li>Workflow automation and intelligent dashboards</li>
-                            <li>IoT-enabled smart business processes</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-category bg-gray-900 p-8 rounded-xl border border-royal-green/50">
-                        <h3 class="text-2xl font-bold gold mb-4">Technology Integration</h3>
-                        <ul class="list-disc list-inside text-gray-400 space-y-2">
-                             <li>Custom software, ERP & CRM integration</li>
-                             <li>Digital marketing solutions</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="text-center mt-16">
-                    <a href="solutions.html" target="_top" class="font-bold bg-gold text-black py-3 px-8 rounded-md hover:bg-royal-green hover:text-white transition duration-300 transform hover:scale-105 shadow-lg shadow-gold/30">
-                        Read More About Our Services
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Products Section -->
-        <section id="products" class="py-20 bg-gray-900/50">
-             <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Products &</span> <span class="gold">Solutions</span></h2>
-                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-10 text-center">
-                    
-                    <!-- Product Showcase -->
-                    <div class="product-feature p-6">
-                        <h3 class="text-2xl font-bold royal-green mb-4">3D Interactive Product Showcase</h3>
-                        <p class="text-gray-400">Explore our enterprise-grade robotics platforms, AI analytics dashboards, and robust cybersecurity defense systems in immersive 3D.</p>
-                    </div>
-                    
-                    <!-- Virtual Demos -->
-                    <div class="product-feature p-6 border-x-2 border-gold/30">
-                        <h3 class="text-2xl font-bold gold mb-4">Virtual Demos</h3>
-                        <p class="text-gray-400 mb-4">Watch our products in action. See how our AI-powered insights and solutions can transform your operations.</p>
-                        <div class="aspect-video bg-black rounded-lg border-2 border-royal-green flex items-center justify-center">
-                            <p class="text-gray-500">Video player placeholder</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Downloadable Resources -->
-                    <div class="product-feature p-6">
-                        <h3 class="text-2xl font-bold royal-green mb-4">Downloadable Resources</h3>
-                        <p class="text-gray-400 mb-4">Get detailed information about our technology. Download brochures and whitepapers to learn more.</p>
-                        <div class="flex flex-col space-y-4 mt-6">
-                             <a href="#" class="font-bold bg-gold text-black py-2 px-6 rounded-md hover:bg-royal-green hover:text-white transition duration-300">Download Product Brochure</a>
-                             <a href="#" class="font-bold border-2 border-gold text-gold py-2 px-6 rounded-md hover:bg-gold hover:text-black transition duration-300">Read Whitepaper</a>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="text-center mt-16">
-                    <a href="solutions.html#products-section" target="_top" class="font-bold border-2 border-gold text-gold py-3 px-8 rounded-md hover:bg-gold hover:text-black transition duration-300 transform hover:scale-105">
-                        Explore Our Products in Detail
-                    </a>
-                </div>
-             </div>
-        </section>
-
-
-        <!-- Case Studies Section -->
-        <section id="case-studies" class="py-20 bg-black">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Success</span> <span class="gold">Stories</span></h2>
-                <div class="space-y-12">
-                    <!-- Case Study 1 -->
-                    <div class="case-study-card p-8 grid md:grid-cols-3 gap-8 items-center">
-                        <div class="md:col-span-1">
-                            <h3 class="text-2xl font-bold text-white">LogiCorp Inc.</h3>
-                            <p class="text-royal-green font-semibold">Supply Chain Optimization</p>
-                        </div>
-                        <div class="md:col-span-2">
-                            <p class="text-gray-300 mb-4">"Diradz Solutions revolutionized our logistics. Their AI predicted demand with 98% accuracy, saving us millions."</p>
-                            <p class="font-bold"><span class="gold">40%</span> Reduction in operational costs. <span class="gold">60%</span> faster delivery times.</p>
-                        </div>
-                    </div>
-                    <!-- Case Study 2 -->
-                    <div class="case-study-card p-8 grid md:grid-cols-3 gap-8 items-center">
-                        <div class="md:col-span-1">
-                            <h3 class="text-2xl font-bold text-white">FinSecure Bank</h3>
-                            <p class="text-royal-green font-semibold">Fraud Detection</p>
-                        </div>
-                        <div class="md:col-span-2">
-                             <p class="text-gray-300 mb-4">"The Aegis Shield platform is unmatched. It identifies and neutralizes threats before they can impact our systems."</p>
-                            <p class="font-bold"><span class="gold">99.9%</span> reduction in fraudulent transactions. <span class="gold">Zero</span> successful breaches since implementation.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sustainability Section -->
-        <section id="sustainability" class="py-20 bg-gray-900/50">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4"><span class="royal-green">Innovating for a</span> <span class="gold">Greener Tomorrow</span></h2>
-                <p class="max-w-3xl mx-auto text-gray-300 mb-12">We believe technological advancement must go hand-in-hand with environmental responsibility. Our solutions are designed for peak performance and minimal ecological impact.</p>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="border-2 border-gold/30 rounded-lg p-6">
-                        <h3 class="text-3xl font-bold text-royal-green">35%</h3>
-                        <p class="text-gray-400">Reduced Energy Consumption for our clients through optimized IT infrastructure.</p>
-                    </div>
-                     <div class="border-2 border-gold/30 rounded-lg p-6">
-                        <h3 class="text-3xl font-bold text-gold">100%</h3>
-                        <p class="text-gray-400">Carbon Neutral Operations since 2024.</p>
-                    </div>
-                     <div class="border-2 border-gold/30 rounded-lg p-6">
-                        <h3 class="text-3xl font-bold text-royal-green">500+ Tons</h3>
-                        <p class="text-gray-400">Of CO2 emissions prevented annually by our AI-powered resource management.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Blog Section -->
-        <section id="blog" class="py-20 bg-black">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Insights &</span> <span class="gold">Innovations</span></h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Blog Post 1 -->
-                    <div class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-royal-green/40">
-                         <div class="p-6">
-                             <p class="text-sm text-gold mb-2">AI TRENDS</p>
-                             <h3 class="text-xl font-bold text-white mb-4">The Rise of Generative AI in Enterprise</h3>
-                             <a href="blog.html" target="_top" class="font-semibold text-royal-green hover:underline">Read More &rarr;</a>
-                         </div>
-                    </div>
-                     <!-- Blog Post 2 -->
-                    <div class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gold/40">
-                         <div class="p-6">
-                             <p class="text-sm text-royal-green mb-2">CYBERSECURITY</p>
-                             <h3 class="text-xl font-bold text-white mb-4">Are You Quantum-Ready? Preparing for the Next Cryptographic Shift</h3>
-                             <a href="blog.html" target="_top" class="font-semibold text-gold hover:underline">Read More &rarr;</a>
-                         </div>
-                    </div>
-                     <!-- Blog Post 3 -->
-                    <div class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-royal-green/40">
-                         <div class="p-6">
-                             <p class="text-sm text-gold mb-2">AUTOMATION</p>
-                             <h3 class="text-xl font-bold text-white mb-4">Beyond the Factory: How Robotics is Reshaping the Service Industry</h3>
-                             <a href="blog.html" target="_top" class="font-semibold text-royal-green hover:underline">Read More &rarr;</a>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-gray-900/50">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="royal-green">Connect</span> <span class="gold">With Us</span></h2>
-                <div class="max-w-4xl mx-auto bg-black p-8 rounded-lg border-2 border-gold/20">
-                    <form>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <input type="text" placeholder="Your Name" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-royal-green focus:outline-none transition">
-                            <input type="email" placeholder="Your Email" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-royal-green focus:outline-none transition">
-                        </div>
-                        <div class="mt-6">
-                            <input type="text" placeholder="Subject" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition">
-                        </div>
-                        <div class="mt-6">
-                            <textarea placeholder="Your Message" rows="5" class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-700 focus:border-gold focus:outline-none transition"></textarea>
-                        </div>
-                        <div class="mt-6 text-center">
-                            <button type="submit" class="bg-gold text-black font-bold py-3 px-8 rounded-full hover:bg-royal-green hover:text-white transition duration-300 transform hover:scale-105 shadow-lg shadow-gold/30">Send Message</button>
-                        </div>
-                    </form>
-                    <div class="mt-8 pt-8 border-t border-gold/20 text-center">
-                        <p class="text-gray-400 mb-4">Follow us on</p>
-                        <div class="flex justify-center items-center space-x-6">
-                            <a href="https://www.facebook.com/share/17E2G5q1XD/" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
-                            </a>
-                             <a href="https://www.instagram.com/kamaldharmarealty?igsh=MTIyaHY0ZHF6a2ljeQ==" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm0 1.623c-2.393 0-2.713.01-3.664.058-1.144.053-1.62.224-1.932.348-.45.18-.73.398-1.018.688a2.81 2.81 0 00-.688 1.018c-.123.312-.295.788-.348 1.932-.048.95-.058 1.271-.058 3.664s.01 2.713.058 3.664c.053 1.144.224 1.62.348 1.932.18.45.398.73.688 1.018a2.81 2.81 0 001.018.688c.312.123.788.295 1.932.348.95.048 1.271.058 3.664.058s2.713-.01 3.664-.058c1.144-.053 1.62-.224 1.932-.348.45-.18.73-.398 1.018-.688a2.81 2.81 0 00.688-1.018c.123-.312.295-.788.348-1.932.048-.95.058-1.271.058-3.664s-.01-2.713-.058-3.664c-.053-1.144-.224-1.62-.348-1.932a2.81 2.81 0 00-.688-1.018c-.288-.288-.568-.508-1.018-.688-.312-.123-.788-.295-1.932-.348C15.028 3.633 14.708 3.623 12.315 3.623z" clip-rule="evenodd" /><path d="M12 8.118a3.882 3.882 0 100 7.764 3.882 3.882 0 000-7.764zM12 14.3a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z"/><path d="M16.882 7.118a.97.97 0 100-1.94.97.97 0 000 1.94z"/></svg>
-                             </a>
-                             <a href="https://x.com/iamkamaldharma?t=dfBtXSwRhs4IOR3B-cPSBg&s=09" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
-                                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
-                             </a>
-                             <a href="https://wa.me/message/E7C245NJUAKAH1" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors duration-300 social-icon">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.85L2 22l5.25-1.38c1.41.75 3 1.13 4.75 1.13h.04c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.84-9.91-9.84zm4.53 12.28c-.28.42-1.03.78-1.42.83s-.84.05-1.29-.15c-.45-.2-1.02-.48-1.92-1.13c-.9-.65-1.5-1.46-1.72-1.71c-.22-.25-.45-.51-.45-.83s0-.5.15-.65c.15-.15.34-.2.45-.2s.25,0,.38.05c.13.05.28.33.34.42s.08.18.11.28c.03.1.04.15,0,.25c-.04.1-.11.18-.21.28c-.1.1-.21.23-.28.32c-.08.08-.15.17-.04.32c.11.15.48.63.95 1.05c.47.42.87.56 1.02.63c.15.07.24.06.34-.04c.1-.1.42-.48.53-.63c.11-.15.21-.15.34-.1s.41.2.48.25c.07.05.12.08.14.12c.02.04.02.24-.06.48z"/></svg>
-                             </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-black border-t border-gold/20 py-8">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-            <p>&copy; 2025 Diradz Solutions. All Rights Reserved.</p>
-            <p class="text-sm">Pioneering the Future of Digital Intelligence.</p>
-        </div>
-    </footer>
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile Menu Toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            // GSAP Animations
-            gsap.registerPlugin(ScrollTrigger);
-
-            // Staggered fade in for sections
-            gsap.utils.toArray('section').forEach((section, i) => {
-                const h2 = section.querySelector('h2');
-                const content = section.querySelectorAll('p, div:not(.container), form');
-                
-                if(h2) {
-                     gsap.from(h2, {
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 80%",
-                            toggleActions: "play none none none"
-                        },
-                        opacity: 0,
-                        y: 50,
-                        duration: 0.6
-                    });
-                }
-               
-                gsap.from(content, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 70%",
-                        toggleActions: "play none none none"
-                    },
-                    opacity: 0,
-                    y: 50,
-                    duration: 0.6,
-                    stagger: 0.2
-                });
-            });
-
-            // Header shrink on scroll
-            gsap.to("#header", {
-                scrollTrigger: {
-                    trigger: "body",
-                    start: "top top",
-                    end: "+=150",
-                    scrub: 1,
-                },
-                paddingTop: "0.5rem",
-                paddingBottom: "0.5rem",
-                backgroundColor: "rgba(0,0,0,0.8)"
-            });
-
-        });
-
-        // --- Three.js Hero Scene ---
-        let scene, camera, renderer, particles;
-        let mouse = new THREE.Vector2(-100, -100); // Initialize mouse off-screen
-        let particlePositions;
-
-        function initHero() {
-            const container = document.getElementById('hero-canvas-container');
-            
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-            camera.position.z = 5;
-
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(container.offsetWidth, container.offsetHeight);
-            renderer.setClearColor(0x000000, 0);
-            container.appendChild(renderer.domElement);
-            
-            const particleCount = 5000;
-            const particleGeometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
-            
-            const goldColor = new THREE.Color(0xc99040);
-            const whiteColor = new THREE.Color(0xffffff);
-
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-                positions[i3] = (Math.random() - 0.5) * 20;
-                positions[i3 + 1] = (Math.random() - 0.5) * 20;
-                positions[i3 + 2] = (Math.random() - 0.5) * 20;
-                
-                // Assign color (70% gold, 30% white)
-                const color = Math.random() < 0.7 ? goldColor : whiteColor;
-                colors[i3] = color.r;
-                colors[i3 + 1] = color.g;
-                colors[i3 + 2] = color.b;
-            }
-            
-            particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            particlePositions = positions.slice(); // Store original positions
-
-            const particleMaterial = new THREE.PointsMaterial({
-                size: 0.03,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.8,
-                sizeAttenuation: true
-            });
-
-            particles = new THREE.Points(particleGeometry, particleMaterial);
-            scene.add(particles);
-
-            window.addEventListener('resize', onWindowResize, false);
-            container.addEventListener('mousemove', onMouseMove, false);
-            container.addEventListener('mouseleave', onMouseLeave, false);
-
-            animate();
-        }
-
-        function onWindowResize() {
-            const container = document.getElementById('hero-canvas-container');
-            if(container) {
-                camera.aspect = container.offsetWidth / container.offsetHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(container.offsetWidth, container.offsetHeight);
-            }
-        }
-        
-        function onMouseMove(event) {
-            const container = document.getElementById('hero-canvas-container');
-            const rect = container.getBoundingClientRect();
-            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-        }
-        
-        function onMouseLeave(event) {
-            mouse.x = -100;
-            mouse.y = -100;
-        }
-
-        function animate() {
             requestAnimationFrame(animate);
-
-            // Particle animation
-            const positions = particles.geometry.attributes.position.array;
-            const interactionRadius = 1.5;
-            const repelStrength = 0.1;
-            const returnSpeed = 0.02;
-
-            const mouse3D = new THREE.Vector3(mouse.x * (window.innerWidth/200), mouse.y * (window.innerHeight/200), 0);
-            
-            for (let i = 0; i < positions.length; i += 3) {
-                const p = new THREE.Vector3(positions[i], positions[i + 1], positions[i + 2]);
-                const originalP = new THREE.Vector3(particlePositions[i], particlePositions[i + 1], particlePositions[i + 2]);
-
-                const distance = p.distanceTo(mouse3D);
-
-                if (distance < interactionRadius) {
-                    const repelVec = new THREE.Vector3().subVectors(p, mouse3D).normalize();
-                    p.add(repelVec.multiplyScalar(repelStrength));
-                }
-                
-                // Spring back to original position
-                p.lerp(originalP, returnSpeed);
-
-                positions[i] = p.x;
-                positions[i + 1] = p.y;
-                positions[i + 2] = p.z;
-            }
-
-            particles.geometry.attributes.position.needsUpdate = true;
-            particles.rotation.y += 0.0001;
-            
-            renderer.render(scene, camera);
-        }
-
-        initHero();
-        
-        // --- Robot Mascot ---
-        let robotScene, robotCamera, robotRenderer, robotMixer, robotModel, clock;
-        
-        function initRobot() {
-            const container = document.getElementById('robot-mascot');
-            clock = new THREE.Clock();
-
-            robotScene = new THREE.Scene();
-            robotCamera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
-            robotCamera.position.set(0, 0.5, 2);
-
-            robotRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            robotRenderer.setSize(container.clientWidth, container.clientHeight);
-            robotRenderer.setClearColor(0x000000, 0);
-            container.appendChild(robotRenderer.domElement);
-
-            // Lighting
-            const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 2);
-            hemiLight.position.set(0, 20, 0);
-            robotScene.add(hemiLight);
-
-            const dirLight = new THREE.DirectionalLight(0xffffff, 2);
-            dirLight.position.set(3, 10, 10);
-            robotScene.add(dirLight);
-
-            // Simple Robot Geometry
-            const group = new THREE.Group();
-            
-            const headMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.8, roughness: 0.2 });
-            const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0x006A4E, metalness: 0.6, roughness: 0.4 });
-            const eyeMaterial = new THREE.MeshStandardMaterial({ color: 0xFFFF00, emissive: 0xFFFF00, metalness: 1 });
-            
-            // Head
-            const head = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 0.5), headMaterial);
-            head.position.y = 0.5;
-            
-            // Eyes
-            const eye1 = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 16), eyeMaterial);
-            eye1.position.set(-0.1, 0.6, 0.25);
-            const eye2 = eye1.clone();
-            eye2.position.x = 0.1;
-            
-            // Body
-            const body = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.7, 0.4), bodyMaterial);
-            
-            group.add(head);
-            group.add(eye1);
-            group.add(eye2);
-            group.add(body);
-            
-            robotModel = group;
-            robotScene.add(robotModel);
-
-            robotAnimate();
-        }
-
-        function robotAnimate() {
-            requestAnimationFrame(robotAnimate);
             const delta = clock.getDelta();
             if (robotMixer) robotMixer.update(delta);
             
