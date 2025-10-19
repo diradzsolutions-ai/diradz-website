@@ -8,112 +8,415 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Deferred JS Libraries for Performance -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
+    <script src="https://unpkg.com/swup@4" defer></script>
+
     <style>
         :root {
             --diradz-gold: #c99040;
+            --dark-navy: #0a192f;
         }
         body {
-            background-color: #0a0a0a;
+            background-color: var(--dark-navy);
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
+            margin: 0;
         }
         .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .royal-green { color: #006A4E; }
-        .bg-royal-green { background-color: #006A4E; }
         .gold { color: var(--diradz-gold); }
-        .bg-gold { background-color: var(--diradz-gold); }
-        .border-gold { border-color: var(--diradz-gold); }
         .diradz-glow {
             text-shadow: 0 0 8px var(--diradz-gold), 0 0 10px var(--diradz-gold);
         }
+
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            outline: none;
+        }
+        
+        .header {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             z-index: 100;
+             padding: 1rem 0;
+             background: linear-gradient(to bottom, rgba(10, 25, 47, 0.8), transparent);
+        }
+        
+        .nav-link:hover {
+            color: var(--diradz-gold);
+        }
+
+        .blog-post {
+            background: rgba(10, 25, 47, 0.85);
+            border: 1px solid rgba(201, 144, 64, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(201, 144, 64, 0.2);
+        }
+        
+        .footer {
+            position: relative;
+            z-index: 10;
+            background-color: #050d18;
+            padding: 4rem 1.5rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(201, 144, 64, 0.2);
+        }
+
+        /* Swup.js Page Transition Styles */
+        .transition-fade {
+            transition: opacity 0.4s, transform 0.4s;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        html.is-animating .transition-fade {
+            opacity: 0;
+            transform: translateY(20px);
+        }
     </style>
 </head>
-<body class="bg-black">
+<body>
+
+    <canvas id="webgl-canvas"></canvas>
 
     <!-- Header -->
-    <header class="fixed top-0 left-0 w-full bg-black bg-opacity-80 backdrop-blur-md z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" target="_top" class="text-2xl font-montserrat font-black flex items-center gap-2">
+    <header class="header">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="nav-link text-2xl font-montserrat font-black flex items-center gap-2 cursor-pointer">
                 <span class="diradz-glow gold">DIRADZ</span>
                 <span class="gold border-2 border-gold px-2 py-1">SOLUTIONS</span>
             </a>
-            <a href="index.html" target="_top" class="bg-gold text-black font-bold py-2 px-5 rounded-md hover:bg-royal-green hover:text-white transition duration-300 text-sm">Back to Home</a>
+            <div class="hidden lg:flex space-x-6 items-center">
+                <a href="index.html" class="nav-link text-white font-semibold">Home</a>
+                <a href="index.html#about" class="nav-link text-white font-semibold">About Us</a>
+                <a href="index.html#solutions" class="nav-link text-white font-semibold">Solutions</a>
+                <a href="solutions.html" class="nav-link text-white font-semibold">Products and Services</a>
+                <a href="blog.html" class="nav-link gold font-bold">Blog</a>
+                <a href="index.html#contact" class="nav-link text-white font-semibold">Contact Us</a>
+            </div>
         </nav>
     </header>
 
     <!-- Blog Content -->
-    <main class="pt-24">
-        <section id="blog-posts" class="py-20">
-            <div class="container mx-auto px-6">
-                <h1 class="text-5xl font-bold text-center mb-16"><span class="royal-green">Insights &</span> <span class="gold">Innovations</span></h1>
+    <main id="swup" class="transition-fade">
+        <div class="relative z-10 pt-32">
+            <section id="blog-posts" class="py-20">
+                <div class="container mx-auto px-6">
+                    <h1 class="text-5xl font-bold text-center mb-16"><span class="text-white">Insights &</span> <span class="gold">Innovations</span></h1>
+                    
+                    <div class="max-w-4xl mx-auto space-y-16">
+                    
+                        <!-- Blog Post 1 -->
+                        <article class="blog-post">
+                            <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                     <img src="https://placehold.co/800x600/0a192f/c99040?text=Generative+AI" alt="Abstract image representing Generative AI" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">The Rise of Generative AI in Enterprise</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on October 20, 2025 by Alex Johnson</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>Generative AI has transcended its initial hype, becoming a cornerstone of modern enterprise strategy. Unlike traditional analytical AI, which interprets existing data, generative models create new, original content—from code and text to complex imagery and product designs. This capability is unlocking unprecedented levels of efficiency and innovation across industries.</p>
+                                        <p>In software development, AI assistants are now co-pilots, writing boilerplate code, suggesting optimizations, and even debugging complex issues in real-time. This accelerates development cycles and frees up human engineers to focus on high-level architecture and creative problem-solving.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
                 
-                <div class="max-w-4xl mx-auto space-y-16">
+                        <!-- Blog Post 2 -->
+                        <article class="blog-post">
+                             <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                    <img src="https://placehold.co/800x600/0a192f/c99040?text=Quantum+Security" alt="Abstract image representing Quantum Security" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">Are You Quantum-Ready? Preparing for the Next Cryptographic Shift</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on October 15, 2025 by Jasmine Patel</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>The advent of quantum computing represents both a monumental opportunity and a significant threat. While these powerful machines promise to solve problems currently intractable for classical computers, they also pose a direct risk to our current cryptographic standards. Algorithms like RSA and ECC, which protect everything from financial transactions to national security secrets, could be broken in minutes by a sufficiently powerful quantum computer.</p>
+                                        <p>Organizations must begin their transition to quantum-resistant security protocols now. The first step is a comprehensive audit of existing cryptographic systems to identify vulnerabilities. Proactive adoption of post-quantum cryptography will ensure digital trust and security in the coming quantum era.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
                 
-                    <!-- Blog Post 1 -->
-                    <article class="blog-post grid md:grid-cols-3 gap-8 items-start">
-                        <div class="md:col-span-1">
-                             <img src="https://placehold.co/800x600/0a0a0a/c99040?text=Generative+AI" alt="Abstract image representing Generative AI" class="rounded-lg w-full">
-                        </div>
-                        <div class="md:col-span-2">
-                            <h2 class="text-3xl font-bold gold mb-3">The Rise of Generative AI in Enterprise</h2>
-                            <p class="text-gray-400 mb-4 text-sm">Published on October 19, 2025 by Alex Johnson</p>
-                            <div class="text-gray-300 space-y-4 leading-relaxed">
-                                <p>Generative AI has transcended its initial hype, becoming a cornerstone of modern enterprise strategy. Unlike traditional analytical AI, which interprets existing data, generative models create new, original content—from code and text to complex imagery and product designs. This capability is unlocking unprecedented levels of efficiency and innovation across industries.</p>
-                                <p>In software development, AI assistants are now co-pilots, writing boilerplate code, suggesting optimizations, and even debugging complex issues in real-time. This accelerates development cycles and frees up human engineers to focus on high-level architecture and creative problem-solving.</p>
+                        <!-- Blog Post 3 -->
+                         <article class="blog-post">
+                            <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                    <img src="https://placehold.co/800x600/0a192f/c99040?text=Service+Robotics" alt="Abstract image representing Service Robotics" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">Beyond the Factory: How Robotics is Reshaping the Service Industry</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on October 10, 2025 by Sam Chen</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>For decades, robotics has been synonymous with manufacturing. Today, a new generation of intelligent, adaptable robots is moving beyond the factory floor and into the service sector, transforming customer experiences in hospitality, healthcare, and retail.</p>
+                                        <p>This shift is powered by advancements in AI, machine vision, and sensor technology, allowing robots to navigate complex, dynamic human environments safely and effectively. As these technologies continue to mature, the integration of robotics into our daily services will only deepen, creating a more efficient and responsive world.</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </article>
-    
-                    <div class="w-full h-px bg-gold/20"></div>
-    
-                    <!-- Blog Post 2 -->
-                    <article class="blog-post grid md:grid-cols-3 gap-8 items-start">
-                        <div class="md:col-span-1">
-                            <img src="https://placehold.co/800x600/006A4E/ffffff?text=Quantum+Security" alt="Abstract image representing Quantum Security" class="rounded-lg w-full">
-                        </div>
-                        <div class="md:col-span-2">
-                            <h2 class="text-3xl font-bold royal-green mb-3">Are You Quantum-Ready? Preparing for the Next Cryptographic Shift</h2>
-                            <p class="text-gray-400 mb-4 text-sm">Published on October 15, 2025 by Jasmine Patel</p>
-                            <div class="text-gray-300 space-y-4 leading-relaxed">
-                                <p>The advent of quantum computing represents both a monumental opportunity and a significant threat. While these powerful machines promise to solve problems currently intractable for classical computers, they also pose a direct risk to our current cryptographic standards. Algorithms like RSA and ECC, which protect everything from financial transactions to national security secrets, could be broken in minutes by a sufficiently powerful quantum computer.</p>
-                                <p>Organizations must begin their transition to quantum-resistant security protocols now. The first step is a comprehensive audit of existing cryptographic systems to identify vulnerabilities. Proactive adoption of post-quantum cryptography will ensure digital trust and security in the coming quantum era.</p>
+                        </article>
+                        
+                        <!-- Blog Post 4 -->
+                        <article class="blog-post">
+                            <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                     <img src="https://placehold.co/800x600/0a192f/c99040?text=Smart+City+IoT" alt="Abstract image of IoT in a Smart City" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">The Future of IoT in Smart Cities</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on October 8, 2025 by Priya Sharma</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>The Internet of Things (IoT) is the backbone of the modern smart city. By embedding sensors in everything from traffic lights to public utilities, city planners can gather real-time data to optimize services, reduce waste, and improve the quality of life for citizens. This interconnected network allows for smarter traffic management, efficient energy distribution, and proactive infrastructure maintenance.</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </article>
-    
-                     <div class="w-full h-px bg-gold/20"></div>
-    
-                    <!-- Blog Post 3 -->
-                     <article class="blog-post grid md:grid-cols-3 gap-8 items-start">
-                        <div class="md:col-span-1">
-                            <img src="https://placehold.co/800x600/0a0a0a/c99040?text=Service+Robotics" alt="Abstract image representing Service Robotics" class="rounded-lg w-full">
-                        </div>
-                        <div class="md:col-span-2">
-                            <h2 class="text-3xl font-bold gold mb-3">Beyond the Factory: How Robotics is Reshaping the Service Industry</h2>
-                            <p class="text-gray-400 mb-4 text-sm">Published on October 10, 2025 by Sam Chen</p>
-                            <div class="text-gray-300 space-y-4 leading-relaxed">
-                                <p>For decades, robotics has been synonymous with manufacturing. Today, a new generation of intelligent, adaptable robots is moving beyond the factory floor and into the service sector, transforming customer experiences in hospitality, healthcare, and retail.</p>
-                                <p>This shift is powered by advancements in AI, machine vision, and sensor technology, allowing robots to navigate complex, dynamic human environments safely and effectively. As these technologies continue to mature, the integration of robotics into our daily services will only deepen, creating a more efficient and responsive world.</p>
-                            </div>
-                        </div>
-                    </article>
-    
-                </div>
+                        </article>
 
-            </div>
-        </section>
+                        <!-- Blog Post 5 -->
+                        <article class="blog-post">
+                            <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                     <img src="https://placehold.co/800x600/0a192f/c99040?text=Metaverse+Business" alt="Abstract image representing business in the metaverse" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">Navigating the Metaverse: Opportunities for Business</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on October 5, 2025 by Ben Carter</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>The metaverse is rapidly evolving from a niche concept to a tangible digital frontier. For businesses, it presents a wealth of opportunities, including virtual storefronts, immersive marketing campaigns, and collaborative digital workspaces. Companies that establish an early presence can redefine customer engagement and build powerful new revenue streams in this emerging digital economy.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Blog Post 6 -->
+                        <article class="blog-post">
+                            <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                     <img src="https://placehold.co/800x600/0a192f/c99040?text=Ethical+AI" alt="Abstract image representing ethical AI" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">Ethical AI: Building Trust in Automated Systems</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on October 2, 2025 by Dr. Evelyn Reed</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>As AI becomes more integrated into our lives, ensuring it operates ethically is paramount. The principles of ethical AI—transparency, fairness, and accountability—are crucial for building user trust. Developing systems that are explainable and free from bias is not just a technical challenge but a moral imperative for a future where humans and AI collaborate effectively.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Blog Post 7 -->
+                        <article class="blog-post">
+                            <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                     <img src="https://placehold.co/800x600/0a192f/c99040?text=AI+Blockchain" alt="Abstract image of AI and Blockchain" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">The Convergence of AI and Blockchain for Unprecedented Security</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on September 29, 2025 by Kenji Tanaka</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>The synergy between AI and blockchain technology is creating new paradigms in cybersecurity. AI algorithms can analyze vast amounts of blockchain data to detect fraudulent activities and predict threats in real-time, while blockchain provides an immutable, transparent ledger to ensure the integrity of AI-driven decisions and data.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Blog Post 8 -->
+                        <article class="blog-post">
+                            <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                     <img src="https://placehold.co/800x600/0a192f/c99040?text=Predictive+Analytics" alt="Abstract image of predictive analytics charts" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">Predictive Analytics: From Data to Decisions</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on September 25, 2025 by Maria Garcia</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>Predictive analytics empowers businesses to look beyond historical data and forecast future trends with remarkable accuracy. By leveraging machine learning models, companies can optimize inventory, anticipate customer behavior, and proactively address market shifts, turning raw data into a powerful strategic asset for decision-making.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Blog Post 9 -->
+                        <article class="blog-post">
+                            <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                     <img src="https://placehold.co/800x600/0a192f/c99040?text=Green+IT" alt="Abstract image representing Green IT" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">Sustainable Tech: How Green IT is Shaping the Future</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on September 22, 2025 by David Lee</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>Green IT is an essential component of corporate responsibility in the digital age. This movement focuses on minimizing the environmental impact of technology through energy-efficient data centers, responsible hardware lifecycle management, and AI-powered systems that optimize resource consumption, proving that profitability and sustainability can go hand-in-hand.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Blog Post 10 -->
+                        <article class="blog-post">
+                            <div class="grid md:grid-cols-3 gap-8 items-start">
+                                <div class="md:col-span-1">
+                                     <img src="https://placehold.co/800x600/0a192f/c99040?text=Digital+Twin" alt="Abstract image of a Digital Twin" class="rounded-lg w-full">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <h2 class="text-3xl font-bold gold mb-3">Digital Twins: Revolutionizing Industrial Operations</h2>
+                                    <p class="text-white/70 mb-4 text-sm">Published on September 18, 2025 by Chloe Williams</p>
+                                    <div class="text-white space-y-4 leading-relaxed">
+                                        <p>Digital twin technology is transforming the industrial sector by creating highly detailed virtual replicas of physical assets and systems. These dynamic models allow businesses to run simulations, predict maintenance needs, and optimize operations without impacting the real world, leading to massive gains in efficiency, safety, and innovation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-gold/20 py-8">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-            <p>&copy; 2025 Diradz Solutions. All Rights Reserved.</p>
-            <p class="text-sm">Pioneering the Future of Digital Intelligence.</p>
+    <footer class="footer">
+        <div class="container mx-auto">
+            <div class="mb-6">
+                <p class="text-white mb-4">Follow us on</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <a href="https://www.facebook.com/share/17E2G5q1XD/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                    </a>
+                     <a href="https://www.instagram.com/kamaldharmarealty?igsh=MTIyaHY0ZHF6a2ljeQ==" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm0 1.623c-2.393 0-2.713.01-3.664.058-1.144.053-1.62.224-1.932.348-.45.18-.73.398-1.018.688a2.81 2.81 0 00-.688 1.018c-.123.312-.295.788-.348 1.932-.048.95-.058 1.271-.058 3.664s.01 2.713.058 3.664c.053 1.144.224 1.62.348 1.932.18.45.398.73.688 1.018a2.81 2.81 0 001.018.688c.312.123.788.295 1.932.348.95.048 1.271.058 3.664.058s2.713-.01 3.664-.058c1.144-.053 1.62-.224 1.932-.348.45-.18-.73-.398 1.018-.688a2.81 2.81 0 00.688-1.018c.123-.312.295-.788.348-1.932.048-.95.058-1.271.058-3.664s-.01-2.713-.058-3.664c-.053-1.144-.224-1.62-.348-1.932a2.81 2.81 0 00-.688-1.018c-.288-.288-.568-.508-1.018-.688-.312-.123-.788-.295-1.932-.348C15.028 3.633 14.708 3.623 12.315 3.623z" clip-rule="evenodd" /><path d="M12 8.118a3.882 3.882 0 100 7.764 3.882 3.882 0 000-7.764zM12 14.3a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z"/><path d="M16.882 7.118a.97.97 0 100-1.94.97.97 0 000 1.94z"/></svg>
+                     </a>
+                     <a href="https://x.com/iamkamaldharma?t=dfBtSwRhs4IOR3B-cPSBg&s=09" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                     </a>
+                     <a href="https://wa.me/message/E7C24NJUAKAH1" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.85L2 22l5.25-1.38c1.41.75 3 1.13 4.75 1.13h.04c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.84-9.91-9.84zm4.53 12.28c-.28.42-1.03.78-1.42.83s-.84.05-1.29-.15c-.45-.2-1.02-.48-1.92-1.13c-.9-.65-1.5-1.46-1.72-1.71c-.22-.25-.45-.51-.45-.83s0-.5.15-.65c.15-.15.34-.2.45-.2s.25,0,.38.05c.13.05.28.33.34.42s.08.18.11.28c.03.1.04.15,0,.25c-.04.1-.11.18-.21.28c-.1.1-.21.23-.28.32c-.08.08-.15.17-.04.32c.11.15.48.63.95 1.05c.47.42.87.56 1.02.63c.15.07.24.06.34-.04c.1-.1.42-.48.53-.63c.11-.15.21-.15.34-.1s.41.2.48.25c.07.05.12.08.14.12c.02.04.02.24-.06.48z"/></svg>
+                     </a>
+                </div>
+            </div>
+            <div class="text-gray-400 text-xs mt-6 border-t border-gray-800 pt-6">
+                <a href="privacy.html" class="hover:text-gold transition-colors">Privacy Policy</a>
+                <span class="mx-2">|</span>
+                <span>© 2025 Diradz Solutions. All Rights Reserved.</span>
+                <p class="mt-2">Pioneering the Future of Digital Intelligence.</p>
+            </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isSandboxed = window.origin === 'null' || window.origin.includes('usercontent.goog');
 
+            function init3DBackground() {
+                if (!document.getElementById('webgl-canvas')) return;
+
+                const clock = new THREE.Clock();
+                const isMobile = window.innerWidth < 768;
+                
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 5;
+                
+                const renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById('webgl-canvas'),
+                    antialias: !isMobile,
+                    alpha: true
+                });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+                renderer.setClearColor(0x0a192f, 1);
+
+                let stars;
+
+                function createStars() {
+                    const starGeometry = new THREE.BufferGeometry();
+                    const starMaterial = new THREE.PointsMaterial({
+                        color: 0xffffff,
+                        size: 0.02,
+                        transparent: true,
+                        opacity: 0.5
+                    });
+
+                    const starVertices = [];
+                    const numStars = isMobile ? 2000 : 15000;
+                    for (let i = 0; i < numStars; i++) {
+                        const x = (Math.random() - 0.5) * 200;
+                        const y = (Math.random() - 0.5) * 200;
+                        const z = (Math.random() - 0.5) * 200;
+                        starVertices.push(x, y, z);
+                    }
+
+                    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+                    stars = new THREE.Points(starGeometry, starMaterial);
+                    scene.add(stars);
+                }
+
+                createStars();
+                
+                const cameraGroup = new THREE.Group();
+                cameraGroup.add(camera);
+                scene.add(cameraGroup);
+
+                const cameraX = gsap.quickTo(cameraGroup.rotation, "y", { duration: 0.8, ease: "power3.out" });
+                const cameraY = gsap.quickTo(cameraGroup.rotation, "x", { duration: 0.8, ease: "power3.out" });
+
+                window.addEventListener('mousemove', (e) => {
+                    const x = (e.clientX / window.innerWidth - 0.5) * 0.5;
+                    const y = (e.clientY / window.innerHeight - 0.5) * 0.5;
+                    cameraX(x);
+                    cameraY(-y);
+                });
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    if (stars) {
+                        stars.rotation.y += 0.0001;
+                    }
+                    renderer.render(scene, camera);
+                }
+                
+                animate();
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+
+            function initPage() {
+                init3DBackground();
+            }
+
+            if (!isSandboxed) {
+                const swup = new Swup({
+                    containers: ["#swup"],
+                    animationSelector: '[class*="transition-"]'
+                });
+                
+                initPage();
+                swup.hooks.on('page:view', initPage);
+            } else {
+                 console.warn('Swup page transitions are disabled in this sandboxed environment.');
+                 initPage();
+            }
+        });
+    </script>
 </body>
 </html>
-
 
