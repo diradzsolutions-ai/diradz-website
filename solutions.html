@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services & Solutions - Diradz Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --diradz-gold: #c99040;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .royal-green { color: #006A4E; }
+        .bg-royal-green { background-color: #006A4E; }
+        .border-royal-green { border-color: #006A4E; }
+        .gold { color: var(--diradz-gold); }
+        .bg-gold { background-color: var(--diradz-gold); }
+        .border-gold { border-color: var(--diradz-gold); }
+        .diradz-glow {
+            text-shadow: 0 0 8px var(--diradz-gold), 0 0 10px var(--diradz-gold);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--diradz-gold);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link:hover {
+            color: var(--diradz-gold);
+        }
+        .content-card {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 144, 64, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(201, 144, 64, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-black">
+
+    <!-- Header --><header id="header" class="fixed top-0 left-0 w-full bg-black bg-opacity-70 backdrop-blur-md z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" target="_top" class="text-2xl font-montserrat font-black flex items-center gap-2">
+                <span class="diradz-glow gold">DIRADZ</span>
+                <span class="gold border-2 border-gold px-2 py-1">SOLUTIONS</span>
+            </a>
+            <div class="hidden lg:flex space-x-6 items-center">
+                <a href="index.html" target="_top" class="nav-link text-white font-semibold text-sm">Home</a>
+                <a href="index.html#about" target="_top" class="nav-link text-white font-semibold text-sm">About Us</a>
+                <a href="blog.html" target="_top" class="nav-link text-white font-semibold text-sm">Blog</a>
+                <a href="index.html#contact" target="_top" class="bg-royal-green text-white font-bold py-2 px-5 rounded-md hover:bg-gold hover:text-black transition duration-300 shadow-lg shadow-royal-green/30 text-sm">Contact Us</a>
+            </div>
+             <a href="index.html" target="_top" class="lg:hidden text-white font-bold">&larr; Back to Home</a>
+        </nav>
+    </header>
+
+    <main class="pt-24">
+        <!-- Our Services Section --><section id="services" class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-16"><span class="royal-green">Our Comprehensive</span> <span class="gold">Services</span></h1>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                    <div>
+                        <img src="https://images.unsplash.com/sv2SuTA-9ug?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/c99040?text=Cyber+Brain+AI';" alt="Cyber Brain AI and Automation" class="rounded-lg shadow-2xl shadow-royal-green/20 w-full h-auto object-cover">
+                    </div>
+                    <div class="space-y-8">
+                        <div class="content-card p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold gold mb-3">AI & Automation Solutions</h3>
+                            <p class="text-gray-300">Harness the power of artificial intelligence to redefine what’s possible. We develop and integrate custom AI solutions—from predictive analytics to intelligent chatbots—that automate complex processes, unlock critical insights, and create exceptional customer experiences.</p>
+                        </div>
+                        <div class="content-card p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold gold mb-3">IT Services & Cybersecurity</h3>
+                            <p class="text-gray-300">Build a secure, scalable, and resilient digital foundation for your business. We provide expert-led services covering everything from cloud architecture and data protection to complete IT infrastructure management and end-to-end cybersecurity, ensuring your operations are protected and optimized.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-10">
+                    <div class="content-card p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold royal-green mb-3">Business Optimization</h3>
+                        <p class="text-gray-300">Transform your operational efficiency and drive performance. We help you streamline workflows, eliminate bottlenecks, and gain real-time visibility with intelligent automation and IoT-enabled processes, turning your business operations into a powerful competitive advantage.</p>
+                    </div>
+                    <div class="content-card p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold royal-green mb-3">Technology Integration</h3>
+                        <p class="text-gray-300">Unify your digital ecosystem for seamless performance and growth. Our team specializes in custom software development, smooth ERP/CRM integration, and strategic digital marketing to ensure all your technology platforms work in harmony to support your business goals.</p>
+                    </div>
+                     <div class="content-card p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold royal-green mb-3">Sustainability Initiatives</h3>
+                        <p class="text-gray-300">Lead your industry with responsible innovation. We implement strategic green IT solutions that reduce the carbon footprint of your digital operations, lower energy costs, and help you build a more sustainable and efficient business for the future.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-1/2 mx-auto h-px bg-gradient-to-r from-transparent via-gold to-transparent my-16"></div>
+
+        <!-- Products & Solutions Section --><section id="products-section" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6">
+                 <h1 class="text-4xl md:text-5xl font-bold text-center mb-16"><span class="royal-green">Our Flagship</span> <span class="gold">Products & Solutions</span></h1>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-12">
+                     <div class="space-y-8">
+                        <div class="content-card p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold gold mb-3">Robotics Software Solutions</h3>
+                            <p class="text-gray-300">Empower your workforce by automating repetitive, manual tasks. Our powerful Robotics Process Automation (RPA) suite allows you to deploy intelligent software "bots" that handle routine workflows with speed and accuracy, freeing your team to focus on high-value strategic work.</p>
+                        </div>
+                        <div class="content-card p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold gold mb-3">AI-Driven Decision-Making Tools</h3>
+                            <p class="text-gray-300">Navigate complexity with confidence. This intelligent platform analyzes your unique business data to deliver predictive insights, model future scenarios, and provide clear, actionable recommendations, empowering your leadership to make smarter, faster decisions.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Business Intelligence Dashboard" class="rounded-lg shadow-2xl shadow-gold/20 w-full h-auto object-cover">
+                    </div>
+                </div>
+                
+                 <div class="space-y-10 mt-10">
+                    <div class="content-card p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold royal-green mb-3">Smart Business Intelligence Dashboards</h3>
+                        <p class="text-gray-300">Gain a 360-degree, real-time view of your organization's performance. Our customizable BI dashboard product consolidates all your key metrics and data sources into a single, intuitive interface, transforming complex information into clear, actionable insights at a glance.</p>
+                    </div>
+                    <div class="content-card p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold royal-green mb-3">AI-Driven Resource Management Solutions</h3>
+                        <p class="text-gray-300">Achieve your sustainability goals while improving your bottom line. This innovative application uses AI to monitor your organization's resource consumption—from energy to cloud compute—and provides automated optimizations to reduce waste, lower costs, and shrink your environmental footprint.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer --><footer class="bg-black border-t border-gold/20 py-8 mt-16">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2025 Diradz Solutions. All Rights Reserved.</p>
+            <p class="text-sm">Pioneering the Future of Digital Intelligence.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+
+
+
