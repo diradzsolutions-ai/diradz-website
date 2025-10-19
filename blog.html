@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Diradz Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --diradz-gold: #c99040;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .royal-green { color: #006A4E; }
+        .bg-royal-green { background-color: #006A4E; }
+        .gold { color: var(--diradz-gold); }
+        .bg-gold { background-color: var(--diradz-gold); }
+        .border-gold { border-color: var(--diradz-gold); }
+        .diradz-glow {
+            text-shadow: 0 0 8px var(--diradz-gold), 0 0 10px var(--diradz-gold);
+        }
+    </style>
+</head>
+<body class="bg-black">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-black bg-opacity-80 backdrop-blur-md z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" target="_top" class="text-2xl font-montserrat font-black flex items-center gap-2">
+                <span class="diradz-glow gold">DIRADZ</span>
+                <span class="gold border-2 border-gold px-2 py-1">SOLUTIONS</span>
+            </a>
+            <a href="index.html" target="_top" class="bg-gold text-black font-bold py-2 px-5 rounded-md hover:bg-royal-green hover:text-white transition duration-300 text-sm">Back to Home</a>
+        </nav>
+    </header>
+
+    <!-- Blog Content -->
+    <main class="pt-24">
+        <section id="blog-posts" class="py-20">
+            <div class="container mx-auto px-6">
+                <h1 class="text-5xl font-bold text-center mb-16"><span class="royal-green">Insights &</span> <span class="gold">Innovations</span></h1>
+                
+                <div class="max-w-4xl mx-auto space-y-16">
+                
+                    <!-- Blog Post 1 -->
+                    <article class="blog-post grid md:grid-cols-3 gap-8 items-start">
+                        <div class="md:col-span-1">
+                             <img src="https://placehold.co/800x600/0a0a0a/c99040?text=Generative+AI" alt="Abstract image representing Generative AI" class="rounded-lg w-full">
+                        </div>
+                        <div class="md:col-span-2">
+                            <h2 class="text-3xl font-bold gold mb-3">The Rise of Generative AI in Enterprise</h2>
+                            <p class="text-gray-400 mb-4 text-sm">Published on October 19, 2025 by Alex Johnson</p>
+                            <div class="text-gray-300 space-y-4 leading-relaxed">
+                                <p>Generative AI has transcended its initial hype, becoming a cornerstone of modern enterprise strategy. Unlike traditional analytical AI, which interprets existing data, generative models create new, original content—from code and text to complex imagery and product designs. This capability is unlocking unprecedented levels of efficiency and innovation across industries.</p>
+                                <p>In software development, AI assistants are now co-pilots, writing boilerplate code, suggesting optimizations, and even debugging complex issues in real-time. This accelerates development cycles and frees up human engineers to focus on high-level architecture and creative problem-solving.</p>
+                            </div>
+                        </div>
+                    </article>
+    
+                    <div class="w-full h-px bg-gold/20"></div>
+    
+                    <!-- Blog Post 2 -->
+                    <article class="blog-post grid md:grid-cols-3 gap-8 items-start">
+                        <div class="md:col-span-1">
+                            <img src="https://placehold.co/800x600/006A4E/ffffff?text=Quantum+Security" alt="Abstract image representing Quantum Security" class="rounded-lg w-full">
+                        </div>
+                        <div class="md:col-span-2">
+                            <h2 class="text-3xl font-bold royal-green mb-3">Are You Quantum-Ready? Preparing for the Next Cryptographic Shift</h2>
+                            <p class="text-gray-400 mb-4 text-sm">Published on October 15, 2025 by Jasmine Patel</p>
+                            <div class="text-gray-300 space-y-4 leading-relaxed">
+                                <p>The advent of quantum computing represents both a monumental opportunity and a significant threat. While these powerful machines promise to solve problems currently intractable for classical computers, they also pose a direct risk to our current cryptographic standards. Algorithms like RSA and ECC, which protect everything from financial transactions to national security secrets, could be broken in minutes by a sufficiently powerful quantum computer.</p>
+                                <p>Organizations must begin their transition to quantum-resistant security protocols now. The first step is a comprehensive audit of existing cryptographic systems to identify vulnerabilities. Proactive adoption of post-quantum cryptography will ensure digital trust and security in the coming quantum era.</p>
+                            </div>
+                        </div>
+                    </article>
+    
+                     <div class="w-full h-px bg-gold/20"></div>
+    
+                    <!-- Blog Post 3 -->
+                     <article class="blog-post grid md:grid-cols-3 gap-8 items-start">
+                        <div class="md:col-span-1">
+                            <img src="https://placehold.co/800x600/0a0a0a/c99040?text=Service+Robotics" alt="Abstract image representing Service Robotics" class="rounded-lg w-full">
+                        </div>
+                        <div class="md:col-span-2">
+                            <h2 class="text-3xl font-bold gold mb-3">Beyond the Factory: How Robotics is Reshaping the Service Industry</h2>
+                            <p class="text-gray-400 mb-4 text-sm">Published on October 10, 2025 by Sam Chen</p>
+                            <div class="text-gray-300 space-y-4 leading-relaxed">
+                                <p>For decades, robotics has been synonymous with manufacturing. Today, a new generation of intelligent, adaptable robots is moving beyond the factory floor and into the service sector, transforming customer experiences in hospitality, healthcare, and retail.</p>
+                                <p>This shift is powered by advancements in AI, machine vision, and sensor technology, allowing robots to navigate complex, dynamic human environments safely and effectively. As these technologies continue to mature, the integration of robotics into our daily services will only deepen, creating a more efficient and responsive world.</p>
+                            </div>
+                        </div>
+                    </article>
+    
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gold/20 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2025 Diradz Solutions. All Rights Reserved.</p>
+            <p class="text-sm">Pioneering the Future of Digital Intelligence.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+
