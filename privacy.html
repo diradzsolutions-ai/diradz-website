@@ -8,105 +8,348 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Deferred JS Libraries for Performance -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
+    <script src="https://unpkg.com/swup@4" defer></script>
+
     <style>
         :root {
             --diradz-gold: #c99040;
+            --dark-navy: #0a192f;
         }
         body {
-            background-color: #0a0a0a;
+            background-color: var(--dark-navy);
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
         }
         .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .royal-green { color: #006A4E; }
         .gold { color: var(--diradz-gold); }
         .diradz-glow {
             text-shadow: 0 0 8px var(--diradz-gold), 0 0 10px var(--diradz-gold);
         }
+
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            outline: none;
+        }
+        
+        .header {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             z-index: 100;
+             padding: 1rem 0;
+             background: linear-gradient(to bottom, rgba(10, 25, 47, 0.8), transparent);
+             backdrop-filter: blur(4px);
+        }
+        
+        .nav-link:hover {
+            color: var(--diradz-gold);
+        }
+        
+        .content-box {
+            background: rgba(10, 25, 47, 0.85);
+            border: 1px solid rgba(201, 144, 64, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .content-box:hover {
+            box-shadow: 0 0 25px rgba(201, 144, 64, 0.3);
+        }
+
+        .footer {
+            position: relative;
+            z-index: 10;
+            background-color: #050d18;
+            padding: 4rem 1.5rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(201, 144, 64, 0.2);
+        }
+
+        /* Swup.js Page Transition Styles */
+        .transition-fade {
+            transition: opacity 0.4s, transform 0.4s;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        html.is-animating .transition-fade {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Custom Prose Styles */
         .prose-custom {
             color: #d1d5db; /* gray-300 */
         }
         .prose-custom h1, .prose-custom h2, .prose-custom h3 {
-            color: #ffffff;
+            color: var(--diradz-gold);
         }
         .prose-custom a {
             color: var(--diradz-gold);
+            text-decoration: underline;
+        }
+        .prose-custom a:hover {
+            color: #ffffff;
         }
         .prose-custom strong {
             color: #ffffff;
         }
+        .prose-custom ul > li::marker {
+            color: var(--diradz-gold);
+        }
     </style>
 </head>
-<body class="bg-black">
+<body>
 
-    <header id="header" class="w-full bg-black bg-opacity-70 backdrop-blur-md z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" target="_top" class="text-2xl font-montserrat font-black flex items-center gap-2">
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="nav-link text-2xl font-montserrat font-black flex items-center gap-2 cursor-pointer">
                 <span class="diradz-glow gold">DIRADZ</span>
                 <span class="gold border-2 border-gold px-2 py-1">SOLUTIONS</span>
             </a>
-            <a href="index.html" target="_top" class="bg-royal-green text-white font-bold py-2 px-5 rounded-md hover:bg-gold hover:text-black transition duration-300 text-sm">&larr; Back to Home</a>
+            <div class="hidden lg:flex space-x-6 items-center">
+                <a href="index.html" class="nav-link text-white font-semibold">Home</a>
+                <a href="index.html#about" class="nav-link text-white font-semibold">About Us</a>
+                <a href="index.html#solutions" class="nav-link text-white font-semibold">Solutions</a>
+                <a href="solutions.html" class="nav-link text-white font-semibold">Products and Services</a>
+                <a href="blog.html" class="nav-link text-white font-semibold">Blog</a>
+                <a href="index.html#contact" class="nav-link text-white font-semibold">Contact Us</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <div class="lg:hidden">
+                <button id="menu-btn" type="button" class="z-50 block text-white hover:text-gold focus:outline-none">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                        <path id="menu-open-icon" fill-rule="evenodd" d="M4 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2z"/>
+                        <path id="menu-close-icon" class="hidden" fill-rule="evenodd" d="M18.278 17.278a1 1 0 0 1-1.414 0L12 12.414l-4.864 4.864a1 1 0 0 1-1.414-1.414L10.586 11 5.722 6.136a1 1 0 1 1 1.414-1.414L12 9.586l4.864-4.864a1 1 0 1 1 1.414 1.414L13.414 11l4.864 4.864a1 1 0 0 1 0 1.414z"/>
+                    </svg>
+                </button>
+            </div>
         </nav>
+         <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#0a192f] py-4">
+            <div class="flex flex-col items-center space-y-4">
+                <a href="index.html" class="nav-link text-white font-semibold">Home</a>
+                <a href="index.html#about" class="nav-link text-white font-semibold">About Us</a>
+                <a href="index.html#solutions" class="nav-link text-white font-semibold">Solutions</a>
+                <a href="solutions.html" class="nav-link text-white font-semibold">Products and Services</a>
+                <a href="blog.html" class="nav-link text-white font-semibold">Blog</a>
+                <a href="index.html#contact" class="nav-link text-white font-semibold">Contact Us</a>
+            </div>
+        </div>
     </header>
 
-    <main class="pt-16 pb-24">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto prose prose-custom lg:prose-lg">
-                <h1 class="gold font-montserrat">Privacy Policy</h1>
-                <p><strong>Last Updated:</strong> October 20, 2025</p>
+    <main id="swup" class="transition-fade">
+        <div class="relative z-10 pt-32 pb-24">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto content-box">
+                    <div class="prose prose-custom lg:prose-lg max-w-none">
+                        <h1 class="font-montserrat">Privacy Policy</h1>
+                        <p><strong>Last Updated:</strong> October 20, 2025</p>
 
-                <p>Diradz Solutions ("us", "we", or "our") operates the https://www.diradzsolutions.com website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
-                
-                <h2>Information Collection and Use</h2>
-                <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
-                
-                <h3>Types of Data Collected</h3>
-                <h4>Personal Data</h4>
-                <p>While using our Service, particularly the contact form, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
-                <ul>
-                    <li><strong>Name</strong></li>
-                    <li><strong>Email address</strong></li>
-                    <li>Subject and Message content</li>
-                </ul>
+                        <p>Diradz Solutions ("us", "we", or "our") operates the https://www.diradzsolutions.com website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
+                        
+                        <h2>Information Collection and Use</h2>
+                        <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
+                        
+                        <h3>Types of Data Collected</h3>
+                        <h4>Personal Data</h4>
+                        <p>While using our Service, particularly the contact form, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
+                        <ul>
+                            <li><strong>Name</strong></li>
+                            <li><strong>Email address</strong></li>
+                            <li>Subject and Message content</li>
+                        </ul>
 
-                <h2>Use of Data</h2>
-                <p>Diradz Solutions uses the collected data for various purposes:</p>
-                <ul>
-                    <li>To provide and maintain our Service</li>
-                    <li>To respond to your inquiries and support requests</li>
-                    <li>To provide analysis or valuable information so that we can improve the Service</li>
-                    <li>To monitor the usage of the Service</li>
-                    <li>To detect, prevent and address technical issues</li>
-                </ul>
+                        <h2>Use of Data</h2>
+                        <p>Diradz Solutions uses the collected data for various purposes:</p>
+                        <ul>
+                            <li>To provide and maintain our Service</li>
+                            <li>To respond to your inquiries and support requests</li>
+                            <li>To provide analysis or valuable information so that we can improve the Service</li>
+                            <li>To monitor the usage of the Service</li>
+                            <li>To detect, prevent and address technical issues</li>
+                        </ul>
 
-                <h2>Data Security</h2>
-                <p>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+                        <h2>Data Security</h2>
+                        <p>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
 
-                <h2>Service Providers</h2>
-                <p>We may employ third-party companies and individuals to facilitate our Service ("Service Providers"), to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used. For example, our contact form submissions are handled by Netlify. These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+                        <h2>Service Providers</h2>
+                        <p>We may employ third-party companies and individuals to facilitate our Service ("Service Providers"), to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used. For example, our contact form submissions are handled by Netlify. These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
 
-                <h2>Links to Other Sites</h2>
-                <p>Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
+                        <h2>Links to Other Sites</h2>
+                        <p>Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
 
-                <h2>Changes to This Privacy Policy</h2>
-                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+                        <h2>Changes to This Privacy Policy</h2>
+                        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
 
-                <h2>Contact Us</h2>
-                <p>If you have any questions about this Privacy Policy, please contact us:</p>
-                <ul>
-                    <li>By email: contact@diradzsolutions.com</li>
-                    <li>By visiting the contact section on our website: <a href="index.html#contact" target="_top">https://www.diradzsolutions.com/#contact</a></li>
-                </ul>
+                        <h2>Contact Us</h2>
+                        <p>If you have any questions about this Privacy Policy, please contact us:</p>
+                        <ul>
+                            <li>By email: contact@diradzsolutions.com</li>
+                            <li>By visiting the contact section on our website: <a href="index.html#contact" target="_top">https://www.diradzsolutions.com/#contact</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-black border-t border-gold/20 py-8">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-             <p>&copy; 2025 Diradz Solutions. All Rights Reserved.</p>
-             <p class="text-sm">Pioneering the Future of Digital Intelligence.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container mx-auto">
+            <div class="mb-6">
+                <p class="text-white mb-4">Follow us on</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <a href="https://www.facebook.com/share/17E2G5q1XD/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                    </a>
+                     <a href="https://www.instagram.com/kamaldharmarealty?igsh=MTIyaHY0ZHF6a2ljeQ==" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm0 1.623c-2.393 0-2.713.01-3.664.058-1.144.053-1.62.224-1.932.348-.45.18-.73.398-1.018.688a2.81 2.81 0 00-.688 1.018c-.123.312-.295.788-.348 1.932-.048.95-.058 1.271-.058 3.664s.01 2.713.058 3.664c.053 1.144.224 1.62.348 1.932.18.45.398.73.688 1.018a2.81 2.81 0 001.018.688c.312.123.788.295 1.932.348.95.048 1.271.058 3.664.058s2.713-.01 3.664-.058c1.144-.053 1.62-.224 1.932-.348.45-.18-.73-.398 1.018-.688a2.81 2.81 0 00.688-1.018c.123-.312.295-.788.348-1.932.048-.95.058-1.271.058-3.664s-.01-2.713-.058-3.664c-.053-1.144-.224-1.62-.348-1.932a2.81 2.81 0 00-.688-1.018c-.288-.288-.568-.508-1.018-.688-.312-.123-.788-.295-1.932-.348C15.028 3.633 14.708 3.623 12.315 3.623z" clip-rule="evenodd" /><path d="M12 8.118a3.882 3.882 0 100 7.764 3.882 3.882 0 000-7.764zM12 14.3a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z"/><path d="M16.882 7.118a.97.97 0 100-1.94.97.97 0 000 1.94z"/></svg>
+                     </a>
+                     <a href="https://x.com/iamkamaldharma?t=dfBtSwRhs4IOR3B-cPSBg&s=09" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                     </a>
+                     <a href="https://wa.me/message/E7C24NJUAKAH1" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gold transition-colors duration-300">
+                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.85L2 22l5.25-1.38c1.41.75 3 1.13 4.75 1.13h.04c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.84-9.91-9.84zm4.53 12.28c-.28.42-1.03.78-1.42.83s-.84.05-1.29-.15c-.45-.2-1.02-.48-1.92-1.13c-.9-.65-1.5-1.46-1.72-1.71c-.22-.25-.45-.51-.45-.83s0-.5.15-.65c.15-.15.34-.2.45-.2s.25,0,.38.05c.13.05.28.33.34.42s.08.18.11.28c.03.1.04.15,0,.25c-.04.1-.11.18-.21.28c-.1.1-.21.23-.28.32c-.08.08-.15.17-.04.32c.11.15.48.63.95 1.05c.47.42.87.56 1.02.63c.15.07.24.06.34-.04c.1-.1.42-.48.53-.63c.11-.15.21-.15.34-.1s.41.2.48.25c.07.05.12.08.14.12c.02.04.02.24-.06.48z"/></svg>
+                     </a>
+                </div>
+            </div>
+            <div class="text-gray-400 text-xs mt-6 border-t border-gray-800 pt-6">
+                <a href="privacy.html" class="hover:text-gold transition-colors">Privacy Policy</a>
+                <span class="mx-2">|</span>
+                <span>© 2025 Diradz Solutions. All Rights Reserved.</span>
+                <p class="mt-2">Pioneering the Future of Digital Intelligence.</p>
+            </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isSandboxed = window.origin === 'null' || window.origin.includes('usercontent.goog');
 
+            function init3DBackground() {
+                if (!document.getElementById('webgl-canvas')) return;
+
+                const clock = new THREE.Clock();
+                const isMobile = window.innerWidth < 768;
+                
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 5;
+                
+                const renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById('webgl-canvas'),
+                    antialias: !isMobile,
+                    alpha: true
+                });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+                renderer.setClearColor(0x0a192f, 1);
+
+                let stars;
+
+                function createStars() {
+                    const starGeometry = new THREE.BufferGeometry();
+                    const starMaterial = new THREE.PointsMaterial({
+                        color: 0xffffff,
+                        size: 0.02,
+                        transparent: true,
+                        opacity: 0.5
+                    });
+
+                    const starVertices = [];
+                    const numStars = isMobile ? 2000 : 15000;
+                    for (let i = 0; i < numStars; i++) {
+                        const x = (Math.random() - 0.5) * 200;
+                        const y = (Math.random() - 0.5) * 200;
+                        const z = (Math.random() - 0.5) * 200;
+                        starVertices.push(x, y, z);
+                    }
+
+                    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+                    stars = new THREE.Points(starGeometry, starMaterial);
+                    scene.add(stars);
+                }
+
+                createStars();
+                
+                const cameraGroup = new THREE.Group();
+                cameraGroup.add(camera);
+                scene.add(cameraGroup);
+
+                const cameraX = gsap.quickTo(cameraGroup.rotation, "y", { duration: 0.8, ease: "power3.out" });
+                const cameraY = gsap.quickTo(cameraGroup.rotation, "x", { duration: 0.8, ease: "power3.out" });
+
+                window.addEventListener('mousemove', (e) => {
+                    const x = (e.clientX / window.innerWidth - 0.5) * 0.25;
+                    const y = (e.clientY / window.innerHeight - 0.5) * 0.25;
+                    cameraX(x);
+                    cameraY(-y);
+                });
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    if (stars) {
+                        stars.rotation.y += 0.0001;
+                    }
+                    renderer.render(scene, camera);
+                }
+                
+                animate();
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+
+            function initPage() {
+                init3DBackground();
+                
+                 // Mobile Menu Toggle
+                const menuBtn = document.getElementById('menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const openIcon = document.getElementById('menu-open-icon');
+                const closeIcon = document.getElementById('menu-close-icon');
+
+                if (menuBtn) {
+                    menuBtn.addEventListener('click', () => {
+                        mobileMenu.classList.toggle('hidden');
+                        openIcon.classList.toggle('hidden');
+                        closeIcon.classList.toggle('hidden');
+                    });
+                }
+            }
+
+            if (!isSandboxed) {
+                const swup = new Swup({
+                    containers: ["#swup"],
+                    animationSelector: '[class*="transition-"]'
+                });
+                
+                initPage();
+                swup.hooks.on('page:view', initPage);
+            } else {
+                 console.warn('Swup page transitions are disabled in this sandboxed environment.');
+                 initPage();
+            }
+        });
+    </script>
 </body>
 </html>
+
